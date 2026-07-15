@@ -9,7 +9,7 @@ interface CampaignGroupResponse {
   id: string;
   slug: string;
   title: string;
-  status: 'active' | 'scheduled' | 'ended';
+  status: "active" | "scheduled" | "ended";
   partner: { name: string; logoUrl?: string };
   landingUrl: string;
   events: Array<{
@@ -17,7 +17,7 @@ interface CampaignGroupResponse {
     title: string;
     startsAt: string;
     endsAt?: string;
-    status: 'on_sale' | 'ended';
+    status: "on_sale" | "ended";
     imageUrl?: string;
     ticketUrl: string;
   }>;
