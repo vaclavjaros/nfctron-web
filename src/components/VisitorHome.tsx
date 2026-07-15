@@ -17,23 +17,24 @@ interface EventItem {
   accent: string;
   image?: string;
   url?: string;
-  calendarUrl?: string;
-  mapUrl?: string;
+  calendarStart?: string;
+  calendarEnd?: string;
+  priceFrom?: string;
   featured?: boolean;
 }
 
 // Datový tvar je připravený pro pozdější mapování odpovědi NFCtron Tickets API.
 const events: EventItem[] = [
-  { id: 'let-it-roll-2026', title: 'LET IT ROLL 2026', date: '30. července–1. srpna 2026', place: 'Jezero Most', city: 'Most', category: 'Festival', description: 'Největší drum & bass festival na světě', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků', 'Přijímání EUR', 'Zabezpečené vstupenky'], accent: 'from-indigo-950 via-violet-700 to-fuchsia-500', image: 'https://images.nfctron.com/organizers/f56e6361-4114-4691-bbde-8b03e4d760aa.jpg', url: 'https://tickets.letitroll.cz/festival/2026-czk?backUrl=https%3A%2F%2Ftickets.nfctron.com%2Fhome', calendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=LET%20IT%20ROLL%202026&dates=20260730/20260802&location=Jezero%20Most%2C%20Most&details=LET%20IT%20ROLL%202026%20%E2%80%94%20NFCtron', mapUrl: 'https://www.google.com/maps/search/?api=1&query=Jezero%20Most%2C%20Most', featured: true },
-  { id: 'footfest-2026', title: 'Footfest 2026', date: '17.–19. července 2026', place: 'Želeč u Tábora', city: 'Tábor', category: 'Festival', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků'], accent: 'from-fuchsia-900 to-rose-500', image: 'https://images.nfctron.com/organizers/525fe2b1-e849-4709-bcdf-de37ca5e5534.jpg', url: 'https://tickets.nfctron.com/event/danekr-sro/footfest-2026/cart', featured: true },
-  { id: 'mighty-sounds-2027', title: 'Mighty Sounds 2027', date: '25.–27. června 2027', place: 'Letiště Čápův dvůr', city: 'Tábor', category: 'Festival', accent: 'from-emerald-800 via-teal-500 to-lime-300', featured: true },
+  { id: 'let-it-roll-2026', title: 'LET IT ROLL 2026', date: '30. července–1. srpna 2026', place: 'Jezero Most', city: 'Most', category: 'Festival', description: 'Největší drum & bass festival na světě', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků', 'Přijímání EUR', 'Zabezpečené vstupenky'], accent: 'from-indigo-950 via-violet-700 to-fuchsia-500', image: 'https://images.nfctron.com/organizers/f56e6361-4114-4691-bbde-8b03e4d760aa.jpg', url: 'https://tickets.letitroll.cz/festival/2026-czk?backUrl=https%3A%2F%2Ftickets.nfctron.com%2Fhome', calendarStart: '20260730', calendarEnd: '20260802', priceFrom: '4 890 Kč', featured: true },
+  { id: 'footfest-2026', title: 'Footfest 2026', date: '17.–19. července 2026', place: 'Želeč u Tábora', city: 'Tábor', category: 'Festival', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků'], accent: 'from-fuchsia-900 to-rose-500', image: 'https://images.nfctron.com/organizers/525fe2b1-e849-4709-bcdf-de37ca5e5534.jpg', url: 'https://tickets.nfctron.com/event/danekr-sro/footfest-2026/cart', calendarStart: '20260717', calendarEnd: '20260720', featured: true },
+  { id: 'mighty-sounds-2027', title: 'Mighty Sounds 2027', date: '25.–27. června 2027', place: 'Letiště Čápův dvůr', city: 'Tábor', category: 'Festival', accent: 'from-emerald-800 via-teal-500 to-lime-300', calendarStart: '20270625', calendarEnd: '20270628', featured: true },
   { id: 'chinaski-open-air', title: 'Chinaski Open Air Léto', date: '18 koncertů v létě 2026', place: 'Nejkrásnější místa Česka', city: 'Česko', category: 'Koncert', accent: 'from-sky-800 via-blue-500 to-cyan-300' },
-  { id: 'techmission-2026', title: 'Techmission: Hardtech', date: '19. září 2026', place: 'Sportovní hala Fortuna', city: 'Praha', category: 'Rave', accent: 'from-neutral-950 via-rose-700 to-red-400' },
+  { id: 'techmission-2026', title: 'Techmission: Hardtech', date: '19. září 2026', place: 'Sportovní hala Fortuna', city: 'Praha', category: 'Rave', accent: 'from-neutral-950 via-rose-700 to-red-400', calendarStart: '20260919', calendarEnd: '20260920' },
   { id: 'jelenfest-2026', title: 'JelenFest 2026', date: '20 koncertů po celém Česku', place: 'Turné', city: 'Česko', category: 'Koncert', accent: 'from-amber-900 via-orange-600 to-yellow-300' },
-  { id: 'sterkovna-open-music', title: 'Štěrkovna Open Music 2026', date: '23.–26. července 2026', place: 'Hlučínské jezero', city: 'Hlučín', category: 'Hudba', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků'], accent: 'from-blue-950 via-blue-600 to-cyan-300', image: 'https://images.nfctron.com/organizers/ad03b28f-4e52-4649-8b20-6ccc15352ecb.jpg', url: 'https://tickets.nfctron.com/event/new-wind-production/sterkovna-open-music-2026' },
-  { id: 'machac-2026', title: 'Mácháč 2026', date: '14.–15. srpna 2026', place: 'Pláž Klůček', city: 'Doksy', category: 'Hudba', features: ['Platba čipem se vstupenkou', 'Zabezpečené vstupenky'], accent: 'from-pink-700 via-purple-600 to-cyan-400', image: 'https://images.nfctron.com/organizers/b340d8ac-c528-4985-9b57-9ff463308a67.jpg', url: 'https://tickets.nfctron.com/event/machac-entertainment/machac-2026' },
-  { id: '26-sunset-tour-praha', title: '26SUNSET TOUR Sofian Medjmedj', date: '28. srpna 2026', place: 'Ostrov Štvanice', city: 'Praha', category: 'Hudba', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků'], accent: 'from-slate-800 via-amber-700 to-orange-300', image: 'https://images.nfctron.com/organizers/5c55adb1-d640-4b2c-bc77-e9c1cdcad74c.jpg', url: 'https://tickets.nfctron.com/event/wisemusic-s-r-o/26sunset-tour-sofian-medjmedj-praha' },
-  { id: '90s-explosion', title: '90s Explosion 2027', date: '22. května 2027', place: 'Výstaviště Holešovice', city: 'Praha', category: 'Koncert', accent: 'from-purple-900 via-pink-500 to-yellow-300' },
+  { id: 'sterkovna-open-music', title: 'Štěrkovna Open Music 2026', date: '23.–26. července 2026', place: 'Hlučínské jezero', city: 'Hlučín', category: 'Hudba', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků'], accent: 'from-blue-950 via-blue-600 to-cyan-300', image: 'https://images.nfctron.com/organizers/ad03b28f-4e52-4649-8b20-6ccc15352ecb.jpg', url: 'https://tickets.nfctron.com/event/new-wind-production/sterkovna-open-music-2026', calendarStart: '20260723', calendarEnd: '20260727' },
+  { id: 'machac-2026', title: 'Mácháč 2026', date: '14.–15. srpna 2026', place: 'Pláž Klůček', city: 'Doksy', category: 'Hudba', features: ['Platba čipem se vstupenkou', 'Zabezpečené vstupenky'], accent: 'from-pink-700 via-purple-600 to-cyan-400', image: 'https://images.nfctron.com/organizers/b340d8ac-c528-4985-9b57-9ff463308a67.jpg', url: 'https://tickets.nfctron.com/event/machac-entertainment/machac-2026', calendarStart: '20260814', calendarEnd: '20260816' },
+  { id: '26-sunset-tour-praha', title: '26SUNSET TOUR Sofian Medjmedj', date: '28. srpna 2026', place: 'Ostrov Štvanice', city: 'Praha', category: 'Hudba', features: ['Platba čipem se vstupenkou', 'Kontrola zálohovaných kelímků'], accent: 'from-slate-800 via-amber-700 to-orange-300', image: 'https://images.nfctron.com/organizers/5c55adb1-d640-4b2c-bc77-e9c1cdcad74c.jpg', url: 'https://tickets.nfctron.com/event/wisemusic-s-r-o/26sunset-tour-sofian-medjmedj-praha', calendarStart: '20260828', calendarEnd: '20260829' },
+  { id: '90s-explosion', title: '90s Explosion 2027', date: '22. května 2027', place: 'Výstaviště Holešovice', city: 'Praha', category: 'Koncert', accent: 'from-purple-900 via-pink-500 to-yellow-300', calendarStart: '20270522', calendarEnd: '20270523' },
 ];
 
 const categories = [['Vše', ''], ['Výběr NFCtron', '☆'], ['Výhodnější vstupenky', '◉'], ['Hudba', '♫'], ['Gastro', '♨'], ['Kultura', '▦'], ['Víno', '♜'], ['Sportovní', '♙'], ['Sériové akce', '▣'], ['Festival', '△']];
@@ -73,24 +74,48 @@ function CalendarIcon({ className = 'h-4 w-4' }: { className?: string }) {
   return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2" /><path d="M8 3.5V7M16 3.5V7M3.5 10h17" /></svg>;
 }
 
+function getCalendarUrl(event: EventItem) {
+  if (!event.calendarStart || !event.calendarEnd) return null;
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: event.title,
+    dates: `${event.calendarStart}/${event.calendarEnd}`,
+    location: `${event.place}, ${event.city}`,
+    details: `${event.title} — NFCtron`,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function getMapUrl(event: EventItem) {
+  const params = new URLSearchParams({ api: '1', query: `${event.place}, ${event.city}` });
+  return `https://www.google.com/maps/search/?${params.toString()}`;
+}
+
 function EventCard({ event, t, large = false }: { event: EventItem; t: Translator; large?: boolean }) {
   const eventUrl = event.url ?? `/events/${event.id}`;
+  const calendarUrl = getCalendarUrl(event);
+  const mapUrl = getMapUrl(event);
   return (
       <article className="group min-w-0 overflow-hidden rounded-xl border border-black/5 bg-white transition duration-300 hover:border-primary-200 hover:shadow-md hover:shadow-primary-900/5">
         <Link href={eventUrl} className="block" aria-label={`Otevřít ${event.title}`}>
         <div className={`relative ${large ? 'h-60 sm:h-64' : 'aspect-[16/8]'} bg-gradient-to-br ${event.accent} overflow-hidden`}>
-          {event.image && <Image src={event.image} alt={event.title} fill sizes={large ? '(min-width: 1024px) 40vw' : '(min-width: 768px) 33vw, 100vw'} className="object-cover" />}
+          {event.image && <Image src={event.image} alt={event.title} fill sizes={large ? '(min-width: 1280px) 704px, (min-width: 1024px) 55vw, 100vw' : '(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw'} loading={large ? 'eager' : 'lazy'} fetchPriority={large ? 'high' : 'auto'} className="object-cover" />}
         </div>
         </Link>
         <div className={`relative ${large ? 'p-3.5 sm:p-4' : 'p-4'}`}>
-          <div className="pr-14">
-            <h3 className="text-base font-semibold leading-tight tracking-[-0.02em] text-gray-900"><Link href={eventUrl} className="transition hover:text-primary-700">{event.title}</Link></h3>
-            <p className="mt-2 text-xs text-gray-500">{t(event.description ?? (event.category === 'Festival' ? 'Festival plný hudby a zážitků' : 'Objevte akci v NFCtron Tickets'))}</p>
-            {event.features?.length ? <div className={`${large ? 'mt-2.5' : 'mt-3'} flex flex-col items-start gap-1.5 sm:flex-row sm:flex-wrap`}>{event.features.slice(0, 2).map(feature => <span key={feature} className={`${large ? 'w-full sm:w-auto' : ''} inline-flex items-center justify-center rounded-full bg-primary-50 px-3.5 py-1 text-center text-[9px] font-medium text-primary-700`}>{t(feature)}</span>)}</div> : null}
-            <div className={`${large ? 'mt-3' : 'mt-4'} flex flex-col items-start gap-1.5 text-[10px] text-gray-500 sm:text-[11px]`}>
-              {event.calendarUrl ? <a href={event.calendarUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md py-0.5 transition hover:text-primary-700" aria-label={`Přidat ${event.title} do kalendáře`}><CalendarIcon className="h-3.5 w-3.5 shrink-0" />{t(event.date)}</a> : <span className="inline-flex items-center gap-2 py-0.5"><CalendarIcon className="h-3.5 w-3.5 shrink-0" />{t(event.date)}</span>}
-              {event.mapUrl ? <a href={event.mapUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-md py-0.5 transition hover:text-primary-700" aria-label={`Otevřít ${event.place} v mapách`}><span className="flex h-3.5 w-3.5 items-center justify-center text-[11px] text-gray-400">⌖</span>{t(event.place)} · {t(event.city)}</a> : <span className="inline-flex items-center gap-2 py-0.5"><span className="flex h-3.5 w-3.5 items-center justify-center text-[11px] text-gray-400">⌖</span>{t(event.place)} · {t(event.city)}</span>}
+          <div>
+            <h3 className="pr-14 text-base font-semibold leading-tight tracking-[-0.02em] text-gray-900"><Link href={eventUrl} className="transition hover:text-primary-700">{event.title}</Link></h3>
+            <p className="mt-1.5 pr-14 text-xs text-gray-500">{t(event.description ?? (event.category === 'Festival' ? 'Festival plný hudby a zážitků' : 'Objevte akci v NFCtron Tickets'))}</p>
+            <div className={`${large ? 'mt-2.5 sm:flex-row sm:items-center sm:gap-3' : 'mt-2.5'} flex flex-col items-start gap-1.5 text-[9px] text-gray-500 sm:text-[10px]`}>
+              {calendarUrl ? <a href={calendarUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 py-0.5 transition hover:text-primary-700" aria-label={`Přidat ${event.title} do kalendáře`}><CalendarIcon className="h-3 w-3 shrink-0" />{t(event.date)}</a> : <span className="inline-flex items-center gap-1.5 py-0.5"><CalendarIcon className="h-3 w-3 shrink-0" />{t(event.date)}</span>}
+              {large ? <span aria-hidden="true" className="hidden h-3 w-px bg-gray-200 sm:block" /> : null}
+              <a href={mapUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 py-0.5 transition hover:text-primary-700" aria-label={`Otevřít ${event.place} v mapách`}><span className="flex h-3 w-3 items-center justify-center text-[9px] text-gray-400">⌖</span>{t(event.place)} · {t(event.city)}</a>
             </div>
+            {event.features?.length ? <div className="mt-2.5 flex flex-col items-start gap-1.5 sm:flex-row sm:flex-wrap">{event.features.slice(0, 2).map(feature => <span key={feature} className={`${large ? 'w-full sm:w-auto' : ''} inline-flex items-center justify-center rounded-full bg-primary-50 px-2.5 py-0.5 text-center text-[8px] font-medium text-primary-700`}>{t(feature)}</span>)}</div> : null}
+            {large && event.priceFrom ? <div className="mt-3 flex flex-col items-stretch gap-3 border-t border-gray-100 pt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <div><span className="block text-[9px] uppercase tracking-[0.08em] text-gray-400">{t('Vstupenky od')}</span><strong className="mt-0.5 block text-sm font-semibold text-primary-900">{event.priceFrom}</strong></div>
+              <Link href={eventUrl} className="inline-flex h-8 items-center justify-center gap-2 rounded-full bg-primary-700 px-4 text-[10px] font-medium text-white transition hover:bg-primary-900">{t('Vybrat vstupenky')} <ArrowIcon /></Link>
+            </div> : null}
           </div>
           <span className="absolute right-4 top-4 overflow-hidden rounded-md border border-gray-200 bg-gray-50 text-center"><b className="block bg-primary-700 px-2 py-0.5 text-[9px] uppercase text-white">{event.date.startsWith('30. července') ? 'ČVC' : event.date.includes('srpna') ? 'SRP' : 'ČVC'}</b><span className="block px-2 py-1 text-sm font-semibold text-gray-600">{event.date.match(/\d+/)?.[0]}</span></span>
         </div>
@@ -134,6 +159,27 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
+        <section className="bg-white px-4 py-6 sm:px-6 sm:py-7 lg:px-8">
+          <div className="mx-auto grid max-w-7xl overflow-hidden rounded-2xl bg-[#11103f] text-white lg:grid-cols-[1.12fr_.88fr]">
+            <div className="p-7 sm:p-9 lg:p-11">
+              <div className="flex flex-wrap items-center gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-white/55"><span>NFCtron</span><span className="h-1 w-1 rounded-full bg-white/25" /><span>Mastercard Click to Pay</span></div>
+              <h2 className="mt-4 max-w-xl text-3xl font-semibold leading-[1.08] tracking-[-0.04em] sm:text-4xl">{t('Levnější vstupenky. Méně vyplňování.')}</h2>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-white/60">{t('Zaplaťte kartou Mastercard přes Click to Pay a u vybraných akcí získejte výhodnější cenu. Jeden bezpečný profil, žádné opakované zadávání údajů.')}</p>
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[10px] text-white/65">
+                {[t('Výhodnější ceny'), t('Bezpečně uložené karty'), t('Rychlejší online platba')].map(item => <span key={item} className="inline-flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#ff5f00]" />{item}</span>)}
+              </div>
+              <Link href="https://tickets.nfctron.com/tour/mastercard-clicktopay" className="mt-7 inline-flex h-9 items-center gap-2 rounded-full bg-white px-5 text-[11px] font-medium text-primary-900 transition hover:bg-primary-50">{t('Prohlédnout výhodnější vstupenky')} <ArrowIcon /></Link>
+            </div>
+            <div className="relative hidden min-h-[300px] overflow-hidden border-l border-white/10 lg:block">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(79,107,234,.35),transparent_42%),linear-gradient(145deg,#201b68,#090928)]" />
+              <div className="absolute left-1/2 top-1/2 w-[340px] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] rounded-2xl border border-white/15 bg-white/10 p-6 shadow-2xl shadow-black/25 backdrop-blur-md">
+                <div className="flex items-start justify-between"><div><p className="text-[9px] uppercase tracking-[0.16em] text-white/45">Click to Pay</p><p className="mt-2 text-sm font-medium">{t('Jednou uložit. Příště jen zaplatit.')}</p></div><div className="relative h-10 w-16"><span className="absolute left-1 top-1 h-9 w-9 rounded-full bg-[#eb001b]"/><span className="absolute right-1 top-1 h-9 w-9 rounded-full bg-[#f79e1b] opacity-90"/></div></div>
+                <div className="mt-14 flex items-end justify-between border-t border-white/10 pt-5"><div><p className="text-[9px] text-white/40">{t('Platba chráněná technologií Mastercard')}</p><p className="mt-1 text-xs text-white/75">•••• 2048</p></div><span className="rounded-full bg-white/10 px-3 py-1 text-[9px] text-white/60">{t('Připraveno k platbě')}</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-white pb-12 pt-6 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-7">
           <div className="container-fluid">
             <div className="flex items-end justify-between gap-6"><div><p className="text-xs font-semibold uppercase tracking-[.16em] text-primary-600">{t('Více míst, jeden zážitek')}</p><h2 className="mt-3 text-3xl font-semibold tracking-[-.035em] text-primary-900">{t('Sériové akce')}</h2></div><button className="hidden text-sm font-medium text-primary-700 sm:block">{t('Zobrazit všechny')} →</button></div>
@@ -157,7 +203,7 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section id="events" className="bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14">
+        <section id="events" className="scroll-mt-16 bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14">
           <div className="container-fluid">
             <h1 className="text-2xl font-bold tracking-[-0.025em] text-gray-900">{t('Vstupenky v prodeji')}</h1>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -194,7 +240,7 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className="scroll-mt-14 bg-white py-10 sm:py-11 lg:py-12" id="support">
+        <section className="scroll-mt-16 bg-white py-10 sm:py-11 lg:py-12" id="support">
           <div className="container-fluid">
             <div className="grid gap-6 lg:grid-cols-[.7fr_1.3fr] lg:items-start">
               <div className="max-w-md">
@@ -236,7 +282,7 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section id="how-it-works" className="section bg-white">
+        <section id="how-it-works" className="section scroll-mt-16 bg-white">
           <div className="container-fluid text-center">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[.16em] text-primary-600">{t('NFCtron na akcích')}</p>
             <h2 className="section-title">{t('Méně čekání. Více zážitků.')}</h2>
@@ -257,7 +303,7 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
       <footer className="bg-primary-900 py-12 text-white">
         <div className="container-fluid flex flex-col justify-between gap-6 sm:flex-row sm:items-center">
           <div><Image src="/nfctron-logo-white.svg" alt="NFCtron" width={106} height={20} /><p className="mt-3 text-xs text-white/40">{t('Vstupenky a bezstarostné placení na akcích.')}</p></div>
-          <div className="flex flex-wrap gap-5 text-xs text-white/50"><Link href="#events">{t('Akce')}</Link><Link href="/for-organizers">{t('Pro pořadatele')}</Link><Link href="/contact">{t('Kontakt')}</Link><Link href="/privacy">{t('Soukromí')}</Link></div>
+          <div className="flex flex-wrap gap-5 text-xs text-white/50"><Link href="#events">{t('Akce')}</Link><Link href="/for-organizers">{t('Pro pořadatele')}</Link><a href="mailto:info@nfctron.com">{t('Kontakt')}</a></div>
         </div>
       </footer>
     </div>
