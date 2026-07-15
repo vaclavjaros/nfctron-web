@@ -3,7 +3,7 @@ import Link from 'next/link';
 import LanguageMenu from './LanguageMenu';
 import { translate, type Locale } from '@/i18n/config';
 
-type SiteMode = 'home' | 'organizers' | 'retailers';
+type SiteMode = 'home' | 'organizers' | 'retailers' | 'artists';
 
 interface SiteHeaderProps {
   locale: Locale;
@@ -14,6 +14,7 @@ const MODES: Array<{ id: SiteMode; label: string; href: string }> = [
   { id: 'home', label: 'Návštěvníci', href: '/' },
   { id: 'organizers', label: 'Pořadatelé', href: '/for-organizers' },
   { id: 'retailers', label: 'Prodejci', href: '/for-retailers' },
+  { id: 'artists', label: 'Interpreti', href: '/for-artists' },
 ];
 
 function SupportIcon() {

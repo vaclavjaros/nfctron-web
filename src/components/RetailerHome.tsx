@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import SiteFooter from './SiteFooter';
 import SiteHeader from './SiteHeader';
 import { translate, type Locale } from '@/i18n/config';
 
@@ -22,5 +23,6 @@ export default function RetailerHome({ locale }: { locale: Locale }) {
         <div className="mt-10 text-center"><Link href="/" className="inline-flex h-9 items-center rounded-full border border-gray-200 px-5 text-[11px] font-medium text-primary-700 transition hover:bg-primary-50">{t('Zpět na hlavní stránku')}</Link></div>
       </div>
     </main>
+    <SiteFooter locale={locale} />
   </div>;
 }

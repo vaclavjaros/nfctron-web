@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import SiteHeader from './SiteHeader';
+import SiteFooter from './SiteFooter';
+import CampaignFeature, { type CampaignFeatureData } from './CampaignFeature';
 import { translate, type Locale } from '@/i18n/config';
 
 type Translator = (value: string) => string;
@@ -61,6 +63,18 @@ const supportItems = [
   { title: 'Vstupenka a QR kód', text: 'Zjistěte, kde vstupenku najdete a zda ji potřebujete tisknout.', href: 'https://tickets.nfctron.com/receipt' },
   { title: 'Ztracený QR kód', text: 'Poradíme, jak znovu získat přístup k online účtence a čipu.', href: 'https://tickets.nfctron.com/receipt' },
 ];
+
+const clickToPayCampaign: CampaignFeatureData = {
+  id: 'mastercard-click-to-pay',
+  eyebrow: 'Aktivní kampaně a spolupráce',
+  partner: 'Mastercard Click to Pay',
+  title: 'Levnější vstupenky. Méně vyplňování.',
+  description: 'Zaplaťte kartou Mastercard přes Click to Pay a u vybraných akcí získejte výhodnější cenu. Jeden bezpečný profil, žádné opakované zadávání údajů.',
+  benefits: ['Výhodnější ceny', 'Bezpečně uložené karty', 'Rychlejší online platba'],
+  metrics: [{ value: 70, label: 'Akcí 2026' }, { value: 17, label: 'Akcí 2027' }, { value: 71, label: 'Proběhlých akcí' }],
+  activeEventCount: 87,
+  href: 'https://tickets.nfctron.com/tour/mastercard-clicktopay',
+};
 
 function ArrowIcon() {
   return <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
@@ -144,11 +158,11 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
       <SiteHeader locale={locale} />
 
       <main>
-        <section id="home" className="bg-white pb-4 pt-8 sm:pb-5 sm:pt-10 lg:pb-5 lg:pt-12">
+        <section id="home" className="bg-white pb-10 pt-10 sm:pb-12 sm:pt-12 lg:pb-14 lg:pt-14">
           <div className="container-fluid grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
             <div className="max-w-xl">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[.16em] text-primary-600">{t('Vstupenky a placení na akcích')}</p>
-              <h1 className="text-4xl font-bold leading-[1.08] tracking-[-.045em] text-primary-900 sm:text-5xl">{t('Na akci bez starostí. Od vstupenky až po poslední drink.')}</h1>
+              <h1 className="text-[38px] font-semibold leading-[1.09] tracking-[-.04em] text-primary-900 sm:text-[44px] lg:text-5xl">{t('Na akci bez starostí. Od vstupenky až po poslední drink.')}</h1>
               <p className="mt-5 max-w-lg text-base leading-relaxed text-gray-500">{t('Objevte akce a kupte si vstupenku jednoduše online. NFCtron vám podle typu akce pomůže také s rychlým vstupem, pohodlným placením nebo vrácením nevyužitého kreditu.')}</p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a href="#events" className="btn-primary">{t('Prohlédnout akce')} <ArrowIcon /></a>
@@ -159,28 +173,9 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className="bg-white px-4 py-6 sm:px-6 sm:py-7 lg:px-8">
-          <div className="mx-auto grid max-w-7xl overflow-hidden rounded-2xl bg-[#11103f] text-white lg:grid-cols-[1.12fr_.88fr]">
-            <div className="p-7 sm:p-9 lg:p-11">
-              <div className="flex flex-wrap items-center gap-2 text-[10px] font-medium uppercase tracking-[0.14em] text-white/55"><span>NFCtron</span><span className="h-1 w-1 rounded-full bg-white/25" /><span>Mastercard Click to Pay</span></div>
-              <h2 className="mt-4 max-w-xl text-3xl font-semibold leading-[1.08] tracking-[-0.04em] sm:text-4xl">{t('Levnější vstupenky. Méně vyplňování.')}</h2>
-              <p className="mt-4 max-w-xl text-sm leading-6 text-white/60">{t('Zaplaťte kartou Mastercard přes Click to Pay a u vybraných akcí získejte výhodnější cenu. Jeden bezpečný profil, žádné opakované zadávání údajů.')}</p>
-              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[10px] text-white/65">
-                {[t('Výhodnější ceny'), t('Bezpečně uložené karty'), t('Rychlejší online platba')].map(item => <span key={item} className="inline-flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#ff5f00]" />{item}</span>)}
-              </div>
-              <Link href="https://tickets.nfctron.com/tour/mastercard-clicktopay" className="mt-7 inline-flex h-9 items-center gap-2 rounded-full bg-white px-5 text-[11px] font-medium text-primary-900 transition hover:bg-primary-50">{t('Prohlédnout výhodnější vstupenky')} <ArrowIcon /></Link>
-            </div>
-            <div className="relative hidden min-h-[300px] overflow-hidden border-l border-white/10 lg:block">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(79,107,234,.35),transparent_42%),linear-gradient(145deg,#201b68,#090928)]" />
-              <div className="absolute left-1/2 top-1/2 w-[340px] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] rounded-2xl border border-white/15 bg-white/10 p-6 shadow-2xl shadow-black/25 backdrop-blur-md">
-                <div className="flex items-start justify-between"><div><p className="text-[9px] uppercase tracking-[0.16em] text-white/45">Click to Pay</p><p className="mt-2 text-sm font-medium">{t('Jednou uložit. Příště jen zaplatit.')}</p></div><div className="relative h-10 w-16"><span className="absolute left-1 top-1 h-9 w-9 rounded-full bg-[#eb001b]"/><span className="absolute right-1 top-1 h-9 w-9 rounded-full bg-[#f79e1b] opacity-90"/></div></div>
-                <div className="mt-14 flex items-end justify-between border-t border-white/10 pt-5"><div><p className="text-[9px] text-white/40">{t('Platba chráněná technologií Mastercard')}</p><p className="mt-1 text-xs text-white/75">•••• 2048</p></div><span className="rounded-full bg-white/10 px-3 py-1 text-[9px] text-white/60">{t('Připraveno k platbě')}</span></div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <CampaignFeature campaign={clickToPayCampaign} locale={locale} />
 
-        <section className="bg-white pb-12 pt-6 sm:pb-14 sm:pt-7 lg:pb-16 lg:pt-7">
+        <section className="section bg-white">
           <div className="container-fluid">
             <div className="flex items-end justify-between gap-6"><div><p className="text-xs font-semibold uppercase tracking-[.16em] text-primary-600">{t('Více míst, jeden zážitek')}</p><h2 className="mt-3 text-3xl font-semibold tracking-[-.035em] text-primary-900">{t('Sériové akce')}</h2></div><button className="hidden text-sm font-medium text-primary-700 sm:block">{t('Zobrazit všechny')} →</button></div>
             <div className="mt-8 grid gap-5 lg:grid-cols-3">{series.map(item => <PromoCard key={item.title} item={item} t={t} />)}</div>
@@ -203,21 +198,23 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section id="events" className="scroll-mt-16 bg-white pb-12 pt-10 sm:pb-14 sm:pt-12 lg:pb-16 lg:pt-14">
+        <section id="events" className="section scroll-mt-16 bg-white">
           <div className="container-fluid">
-            <h1 className="text-2xl font-bold tracking-[-0.025em] text-gray-900">{t('Vstupenky v prodeji')}</h1>
-            <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-              <label className="flex h-12 min-w-0 flex-1 items-center gap-3 rounded-full border border-gray-200 bg-white px-5 text-gray-400 shadow-sm">
+            <div className="max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-[.16em] text-primary-600">{t('Najděte svůj další zážitek')}</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-.035em] text-primary-900">{t('Vstupenky v prodeji')}</h2>
+            </div>
+            <div className="mt-7 grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+              <label className="flex h-11 min-w-0 items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 text-gray-400 transition focus-within:border-primary-300 focus-within:ring-2 focus-within:ring-primary-100">
                 <SearchIcon />
                 <input type="search" placeholder={t('Vyhledejte akce podle názvu nebo místa…')} className="min-w-0 flex-1 bg-transparent text-sm text-gray-900 outline-none placeholder:text-gray-400" />
               </label>
-              <button className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-gray-100 px-6 text-sm font-semibold text-gray-800 hover:bg-gray-200"><CalendarIcon />{t('Všechny akce')}</button>
+              <button className="flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-5 text-xs font-semibold text-gray-700 transition hover:border-primary-200 hover:bg-primary-50 hover:text-primary-700"><CalendarIcon />{t('Všechny akce')}</button>
             </div>
-            <h2 className="mt-11 text-xl font-bold text-gray-900">Akce</h2>
-            <div className="mt-5 flex gap-1 overflow-x-auto border-b border-gray-200 pb-0">
-              {categories.map(([category, icon], index) => <button key={category} aria-current={index === 1 ? 'page' : undefined} className={`relative flex shrink-0 items-center gap-2 px-4 pb-3 pt-2 text-xs font-semibold transition ${index === 1 ? 'text-primary-700 after:absolute after:inset-x-0 after:bottom-[-1px] after:h-0.5 after:bg-primary-700' : 'text-gray-700 hover:text-primary-700'}`}><span className="text-sm">{icon}</span>{t(category)}</button>)}
+            <div className="mt-5 flex gap-1.5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {categories.map(([category, icon], index) => <button key={category} aria-current={index === 1 ? 'page' : undefined} className={`flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-[11px] font-medium transition ${index === 1 ? 'bg-primary-100 text-primary-700' : 'text-gray-500 hover:bg-gray-50 hover:text-primary-700'}`}><span className="flex h-3.5 w-3.5 items-center justify-center text-xs" aria-hidden="true">{icon}</span>{t(category)}</button>)}
             </div>
-            <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-3 grid gap-4 border-t border-gray-100 pt-5 md:grid-cols-2 lg:grid-cols-3">
               {catalogEvents.map(event => <EventCard key={event.id} event={event} t={t} />)}
             </div>
           </div>
@@ -240,7 +237,7 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className="scroll-mt-16 bg-white py-10 sm:py-11 lg:py-12" id="support">
+        <section className="section scroll-mt-16 bg-white" id="support">
           <div className="container-fluid">
             <div className="grid gap-6 lg:grid-cols-[.7fr_1.3fr] lg:items-start">
               <div className="max-w-md">
@@ -300,12 +297,7 @@ export default function VisitorHome({ locale }: { locale: Locale }) {
         </section>
       </main>
 
-      <footer className="bg-primary-900 py-12 text-white">
-        <div className="container-fluid flex flex-col justify-between gap-6 sm:flex-row sm:items-center">
-          <div><Image src="/nfctron-logo-white.svg" alt="NFCtron" width={106} height={20} /><p className="mt-3 text-xs text-white/40">{t('Vstupenky a bezstarostné placení na akcích.')}</p></div>
-          <div className="flex flex-wrap gap-5 text-xs text-white/50"><Link href="#events">{t('Akce')}</Link><Link href="/for-organizers">{t('Pro pořadatele')}</Link><a href="mailto:info@nfctron.com">{t('Kontakt')}</a></div>
-        </div>
-      </footer>
+      <SiteFooter locale={locale} />
     </div>
   );
 }
