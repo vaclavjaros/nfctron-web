@@ -1,25 +1,13 @@
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import Stats from '@/components/Stats';
-import Products from '@/components/Products';
-import Solutions from '@/components/Solutions';
-import CaseStudies from '@/components/CaseStudies';
-import CTA from '@/components/CTA';
-import Footer from '@/components/Footer';
+import type { Metadata } from 'next';
+import OrganizerHome from '@/components/OrganizerHome';
+import { getLocale } from '@/i18n/server';
 
-export default function ForOrganizersPage() {
-  return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Stats />
-        <Products />
-        <Solutions />
-        <CaseStudies />
-        <CTA />
-      </main>
-      <Footer />
-    </>
-  );
+export const metadata: Metadata = {
+  title: 'Řešení pro pořadatele akcí | NFCtron',
+  description: 'Vstupenky, platby a provozní data pro pořadatele akcí v jednom propojeném řešení NFCtron.',
+};
+
+export default async function ForOrganizersPage() {
+  const locale = await getLocale();
+  return <OrganizerHome locale={locale} />;
 }
