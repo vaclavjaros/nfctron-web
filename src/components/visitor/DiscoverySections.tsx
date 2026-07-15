@@ -9,7 +9,7 @@ export function HeroSection({ t }: { t: Translator }) {
   return (
     <section
       id="home"
-      className="bg-white pb-10 pt-10 sm:pb-12 sm:pt-12 lg:pb-14 lg:pt-14"
+      className="bg-white pb-6 pt-12 sm:pb-8 sm:pt-14 lg:pb-8 lg:pt-16"
     >
       <div className="container-fluid grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
         <div className="max-w-xl">

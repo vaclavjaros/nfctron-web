@@ -43,7 +43,7 @@ export default function CampaignFeature({
 
   return (
     <section
-      className="bg-white px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14"
+      className="bg-white px-4 pb-12 pt-6 sm:px-6 sm:pb-14 sm:pt-8 lg:px-8 lg:pb-16 lg:pt-8"
       aria-labelledby={`${campaign.id}-title`}
     >
       <div className="mx-auto max-w-7xl">
