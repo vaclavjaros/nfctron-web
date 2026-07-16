@@ -17,6 +17,7 @@ export interface ArtistEvent {
 export interface ArtistProfileConfig {
   slug: string;
   name: string;
+  bookingName: LocalizedText;
   tagline: LocalizedText;
   heroImage: string;
   portraitImage: string;

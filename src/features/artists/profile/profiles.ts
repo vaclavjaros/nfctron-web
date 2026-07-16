@@ -4,6 +4,7 @@ export const artistProfiles = {
   sebastian: {
     slug: "sebastian",
     name: "Sebastian",
+    bookingName: localized("Sebastiana", "Sebastian"),
     tagline: localized(
       "Emoce, energie a show pro klubové pódium i festivalové publikum.",
       "Emotion, energy and a show for club stages and festival crowds.",
@@ -99,6 +100,7 @@ export const artistProfiles = {
   elizabeth: {
     slug: "elizabeth-kopecka",
     name: "Elizabeth Kopecká",
+    bookingName: localized("Elizabeth Kopeckou", "Elizabeth Kopecká"),
     tagline: localized(
       "Výrazný hlas, přirozené charisma a nový český pop.",
       "A distinctive voice, natural charisma and a new chapter in Czech pop.",
@@ -194,7 +196,8 @@ export const artistProfiles = {
   },
   likeIt: {
     slug: "like-it",
-    name: "Like-IT",
+    name: "Like-It",
+    bookingName: localized("Like-It", "Like-It"),
     tagline: localized(
       "Energický český pop rock, silné refrény a koncertní tah.",
       "Energetic Czech pop rock, powerful hooks and real live momentum.",
@@ -203,15 +206,15 @@ export const artistProfiles = {
     portraitImage: "/artists/like-it/hero.jpg",
     showImage: "/artists/like-it/show.jpg",
     bookingEmail: "booking@nfctron.com",
-    bioEyebrow: localized("Like-IT live", "Like-IT live"),
+    bioEyebrow: localized("Like-It live", "Like-It live"),
     bioTitle: localized(
       "Kapela z Třebíče, která ví, jak rozhýbat klub i festival.",
       "A band from Třebíč that knows how to move a club and a festival.",
     ),
     bio: [
       localized(
-        "Like-IT se dostali do širšího povědomí písněmi Nádech a Křídla. Singl Mrazí zazněl také ve filmu Špindl 2 a tvorba kapely pravidelně míří do českých rádií.",
-        "Like-IT reached a wider audience with the songs Nádech and Křídla. Their single Mrazí also appeared in the film Špindl 2 and the band's music regularly reaches Czech radio playlists.",
+        "Like-It se dostali do širšího povědomí písněmi Nádech a Křídla. Singl Mrazí zazněl také ve filmu Špindl 2 a tvorba kapely pravidelně míří do českých rádií.",
+        "Like-It reached a wider audience with the songs Nádech and Křídla. Their single Mrazí also appeared in the film Špindl 2 and the band's music regularly reaches Czech radio playlists.",
       ),
       localized(
         "Za sebou mají desítky festivalů a dvě turné jako předkapela Chinaski. NFCtron zajišťuje booking a propojuje další koncertní sezónu s přímým prodejem vstupenek.",
@@ -251,7 +254,7 @@ export const artistProfiles = {
       ],
     },
     video: {
-      title: "Like-IT — Nezapomenout",
+      title: "Like-It — Nezapomenout",
       url: "https://youtu.be/L4vFd73Q2eY",
       image: "/artists/like-it/hero.jpg",
     },
@@ -262,8 +265,8 @@ export const artistProfiles = {
         "Catchy melodies and a show that connects directly with the crowd.",
       ),
       description: localized(
-        "Like-IT přinášejí plnohodnotný pop-rockový set pro festivaly, městské slavnosti, kluby i společné koncerty.",
-        "Like-IT deliver a complete pop-rock set for festivals, city celebrations, clubs and co-headline shows.",
+        "Like-It přinášejí plnohodnotný pop-rockový set pro festivaly, městské slavnosti, kluby i společné koncerty.",
+        "Like-It deliver a complete pop-rock set for festivals, city celebrations, clubs and co-headline shows.",
       ),
       features: [
         localized("Live band", "Live band"),
@@ -282,7 +285,7 @@ export const artistProfiles = {
       {
         date: "8. 8. 2026",
         city: "Králův Dvůr",
-        venue: "Like-IT + O5 a Radeček",
+        venue: "Like-It + O5 a Radeček",
         status: localized("V prodeji", "On sale"),
       },
       {

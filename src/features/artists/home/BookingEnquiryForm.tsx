@@ -125,7 +125,17 @@ function formatDate(value: string, locale: Locale) {
     : `${day}/${month}/${year}`;
 }
 
-export default function BookingEnquiryForm({ locale }: { locale: Locale }) {
+interface BookingEnquiryFormProps {
+  locale: Locale;
+  selectedArtist?: string;
+  recipientEmail?: string;
+}
+
+export default function BookingEnquiryForm({
+  locale,
+  selectedArtist,
+  recipientEmail = "booking@nfctron.com",
+}: BookingEnquiryFormProps) {
   const content = copy[locale];
   const [dateValue, setDateValue] = useState("");
   const labelClass = "block min-w-0 text-[10px] font-medium text-gray-500";
@@ -146,7 +156,7 @@ export default function BookingEnquiryForm({ locale }: { locale: Locale }) {
       `${content.email}: ${form.get("email")}`,
       `${content.phone}: ${form.get("phone")}`,
     ];
-    window.location.href = `mailto:booking@nfctron.com?subject=${encodeURIComponent(content.subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+    window.location.href = `mailto:${recipientEmail}?subject=${encodeURIComponent(content.subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
   };
 
   return (
@@ -174,20 +184,33 @@ export default function BookingEnquiryForm({ locale }: { locale: Locale }) {
 
       <label className={`relative ${labelClass}`}>
         {content.artist}
-        <select
-          name="artist"
-          required
-          defaultValue=""
-          className={`${inputClass} appearance-none pr-10`}
-        >
-          <option value="" disabled>
-            {content.artistPlaceholder}
-          </option>
-          <option>Sebastian</option>
-          <option>Elizabeth Kopecká</option>
-          <option>Like-IT</option>
-        </select>
-        <SelectChevron />
+        {selectedArtist ? (
+          <>
+            <input type="hidden" name="artist" value={selectedArtist} />
+            <span
+              className={`${inputClass} flex items-center bg-gray-50 font-medium`}
+            >
+              {selectedArtist}
+            </span>
+          </>
+        ) : (
+          <>
+            <select
+              name="artist"
+              required
+              defaultValue=""
+              className={`${inputClass} appearance-none pr-10`}
+            >
+              <option value="" disabled>
+                {content.artistPlaceholder}
+              </option>
+              <option>Sebastian</option>
+              <option>Elizabeth Kopecká</option>
+              <option>Like-It</option>
+            </select>
+            <SelectChevron />
+          </>
+        )}
       </label>
 
       <label className={labelClass}>

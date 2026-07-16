@@ -4,6 +4,7 @@ import ActionLink from "@/components/ui/ActionLink";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import type { Locale } from "@/i18n/config";
+import BookingEnquiryForm from "../home/BookingEnquiryForm";
 import { localize, type ArtistProfileConfig } from "./types";
 
 export default function ArtistProfile({
@@ -14,7 +15,6 @@ export default function ArtistProfile({
   locale: Locale;
 }) {
   const l = (value: Parameters<typeof localize>[1]) => localize(locale, value);
-  const bookingHref = `mailto:${profile.bookingEmail}?subject=${encodeURIComponent(`Booking ${profile.name}`)}&body=${encodeURIComponent("Dobrý den,\n\nmám zájem o booking interpreta.\n\nTermín:\nMísto:\nTyp akce:\nKapacita:\n")}`;
 
   return (
     <div className="min-h-screen bg-white text-primary-900">
@@ -49,7 +49,7 @@ export default function ArtistProfile({
                   {l(profile.tagline)}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <ActionLink href={bookingHref} arrow>
+                  <ActionLink href="#booking" arrow>
                     {locale === "cs" ? "Poptat booking" : "Request booking"}
                   </ActionLink>
                   <ActionLink href="#koncerty" variant="secondary">
@@ -233,37 +233,31 @@ export default function ArtistProfile({
           </div>
         </section>
 
-        <section className="px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
-          <div className="mx-auto grid max-w-[1120px] overflow-hidden rounded-[28px] bg-primary-900 text-white lg:grid-cols-[0.8fr_1.2fr]">
-            <div className="relative min-h-[360px] lg:min-h-[480px]">
-              <Image
-                src={profile.portraitImage}
-                alt={profile.name}
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 450px"
-              />
-            </div>
-            <div className="flex flex-col justify-center p-8 sm:p-12 lg:p-16">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
+        <section
+          id="booking"
+          className="scroll-mt-20 px-5 py-14 sm:px-8 sm:py-20 lg:px-12"
+        >
+          <div className="mx-auto grid max-w-[1120px] gap-9 rounded-[28px] bg-[#f8f8fb] p-7 sm:p-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14 lg:p-12">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary-600">
                 NFCtron Booking
               </p>
               <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl">
                 {locale === "cs"
-                  ? `Chcete ${profile.name} na svou akci?`
+                  ? `Chcete ${l(profile.bookingName)} na svou akci?`
                   : `Want ${profile.name} at your event?`}
               </h2>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-white/65">
+              <p className="mt-5 max-w-md text-sm leading-7 text-gray-500">
                 {locale === "cs"
                   ? "Pošlete nám termín, místo, typ akce a předpokládanou kapacitu. Bookingový tým NFCtron se vám ozve s dostupností a dalšími kroky."
                   : "Send us the date, venue, event type and expected capacity. The NFCtron booking team will get back to you with availability and next steps."}
               </p>
-              <div className="mt-8">
-                <ActionLink href={bookingHref} arrow>
-                  {locale === "cs" ? "Odeslat poptávku" : "Send enquiry"}
-                </ActionLink>
-              </div>
             </div>
+            <BookingEnquiryForm
+              locale={locale}
+              selectedArtist={profile.name}
+              recipientEmail={profile.bookingEmail}
+            />
           </div>
         </section>
       </main>
