@@ -210,6 +210,7 @@ const en: Record<string, string> = {
   "Prohlédnout akce": "Browse events",
   "Prohlédnout akci": "View event",
   "Můj NFCtron": "My NFCtron",
+  Karty: "Cards",
   "Trendy mezi návštěvníky": "Trending with visitors",
   "Co právě nejvíc baví návštěvníky?": "What are visitors into right now?",
   "Vyberte si oblast a podívejte se, o jaké akce mají lidé právě největší zájem.":

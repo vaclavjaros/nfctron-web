@@ -3,18 +3,24 @@ import Link from "next/link";
 import LanguageMenu from "./LanguageMenu";
 import { translate, type Locale } from "@/i18n/config";
 
-type SiteMode = "home" | "organizers" | "retailers" | "artists";
+type SiteMode = "home" | "organizers" | "retailers" | "artists" | "cards";
 
 interface SiteHeaderProps {
   locale: Locale;
   active?: SiteMode;
 }
 
-const MODES: Array<{ id: SiteMode; label: string; href: string }> = [
+const MODES: Array<{
+  id: SiteMode;
+  label: string;
+  href: string;
+  beta?: boolean;
+}> = [
   { id: "home", label: "Návštěvníci", href: "/" },
   { id: "organizers", label: "Pořadatelé", href: "/for-organizers" },
   { id: "retailers", label: "Prodejci", href: "/for-retailers" },
   { id: "artists", label: "Interpreti", href: "/for-artists" },
+  { id: "cards", label: "Karty", href: "/cards", beta: true },
 ];
 
 function SupportIcon() {
@@ -71,7 +77,12 @@ function DesktopModeSwitcher({
           aria-current={active === mode.id ? "page" : undefined}
           className={`flex h-7 items-center whitespace-nowrap rounded-full px-3 text-[10px] font-medium leading-none transition ${active === mode.id ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-primary-700"}`}
         >
-          {t(mode.label)}
+          <span>{t(mode.label)}</span>
+          {mode.beta ? (
+            <span className="ml-1 text-[6px] font-semibold uppercase tracking-[0.08em] text-primary-400">
+              Beta
+            </span>
+          ) : null}
         </Link>
       ))}
     </div>
@@ -102,7 +113,12 @@ function MobileModeSwitcher({
             href={mode.href}
             className={`block rounded-lg px-3 py-2 text-[10px] ${active === mode.id ? "bg-primary-50 font-medium text-primary-700" : "text-gray-600 hover:bg-gray-50"}`}
           >
-            {t(mode.label)}
+            <span>{t(mode.label)}</span>
+            {mode.beta ? (
+              <span className="ml-1.5 text-[7px] font-semibold uppercase tracking-[0.08em] text-primary-400">
+                Beta
+              </span>
+            ) : null}
           </Link>
         ))}
       </div>

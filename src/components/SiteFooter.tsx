@@ -50,6 +50,15 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
               >
                 {t("Interpreti")}
               </Link>
+              <Link
+                href="/cards"
+                className="inline-flex items-center gap-1.5 transition hover:text-primary-700"
+              >
+                {t("Karty")}
+                <span className="text-[7px] font-semibold uppercase tracking-[0.08em] text-primary-400">
+                  Beta
+                </span>
+              </Link>
             </div>
           </div>
 
