@@ -20,7 +20,7 @@ const artists = [
     description: "Pop · koncertní vystoupení",
     href: "/for-artists/elizabeth-kopecka",
     tone: "from-rose-100 to-orange-50",
-    status: "Profil připravujeme",
+    status: "Profil a booking",
   },
   {
     name: "Like-IT",
@@ -28,7 +28,7 @@ const artists = [
     description: "Pop rock · klubová a festivalová show",
     href: "/for-artists/like-it",
     tone: "from-violet-100 to-fuchsia-50",
-    status: "Profil připravujeme",
+    status: "Profil a booking",
   },
 ];
 
