@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import ArtistProfile from "@/features/artists/profile/ArtistProfile";
 import { artistProfiles } from "@/features/artists/profile/profiles";
+import { createArtistMetadata } from "@/features/artists/profile/metadata";
 import { getLocale } from "@/i18n/server";
 
-export const metadata: Metadata = {
-  title: "Sebastian — koncerty a booking | NFCtron",
-  description:
-    "Koncerty, aktuální termíny a booking zpěváka Sebastiana. Poptávky zajišťuje NFCtron.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return createArtistMetadata(artistProfiles.sebastian, locale);
+}
 
 export default async function SebastianPage() {
   const locale = await getLocale();

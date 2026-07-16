@@ -193,6 +193,7 @@ const en: Record<string, string> = {
     "Technology connecting visitors, organizers, vendors and artists.",
   "Pro koho": "For whom",
   "Pomoc a účet": "Help and account",
+  "Nastavení cookies": "Cookie settings",
   "Na akcích bez zbytečných starostí.": "Effortless event experiences.",
   "Vstupenky a placení na akcích": "Tickets and event payments",
   "Na akci bez starostí. Od vstupenky až po poslední drink.":

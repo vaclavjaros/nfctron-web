@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { translate, type Locale } from "@/i18n/config";
+import CookieSettingsButton from "@/features/privacy/CookieSettingsButton";
 
 export default function SiteFooter({ locale }: { locale: Locale }) {
   const t = (value: string) => translate(locale, value);
@@ -107,6 +108,7 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
               >
                 {t("Můj NFCtron")}
               </a>
+              <CookieSettingsButton label={t("Nastavení cookies")} />
             </div>
           </div>
         </div>
