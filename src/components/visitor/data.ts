@@ -174,6 +174,7 @@ export const eventSeries: PromoItem[] = [
     accent: "from-amber-700 via-orange-500 to-yellow-300",
     image:
       "https://images.nfctron.com/event-groups/53e004e4-09d9-4d48-8c0b-663a2d04bfee.png",
+    url: "https://vstupenky.hradycz.cz/tour/hrady-cz-2026?locale=cs&eventGroup=hrady-cz-2026",
   },
   {
     title: "26SUNSET TOUR",
@@ -181,6 +182,7 @@ export const eventSeries: PromoItem[] = [
     action: "Vybrat město",
     accent: "from-slate-900 via-violet-700 to-orange-300",
     image: events.find((event) => event.id === "26-sunset-tour-praha")?.image,
+    url: "https://tickets.nfctron.com/tour/26-sunset-tour-sofian-medjmedj",
   },
   {
     title: "Chinaski Open Air Léto",
@@ -189,6 +191,7 @@ export const eventSeries: PromoItem[] = [
     accent: "from-sky-900 via-blue-600 to-cyan-300",
     image:
       "https://images.nfctron.com/organizers/b1fb6904-12c0-403d-9675-1ac61ef440b7.jpg",
+    url: "https://vstupenky.chinaski.cz/",
   },
   {
     title: "Pam Rabbit – planet 33 tour 2027",

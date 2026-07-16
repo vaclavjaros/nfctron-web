@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PromoCard from "./PromoCard";
 import { eventSeries } from "./data";
 import type { PromoItem, Translator } from "./types";
@@ -22,7 +22,21 @@ function SeriesGrid({ items, t }: { items: PromoItem[]; t: Translator }) {
 
 export default function SeriesSection({ locale }: { locale: Locale }) {
   const [expanded, setExpanded] = useState(false);
+  const additionalSeriesRef = useRef<HTMLDivElement>(null);
   const t = (value: string) => translate(locale, value);
+
+  useEffect(() => {
+    if (!expanded || !window.matchMedia("(max-width: 1023px)").matches) return;
+
+    const scrollTimer = window.setTimeout(() => {
+      additionalSeriesRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 120);
+
+    return () => window.clearTimeout(scrollTimer);
+  }, [expanded]);
 
   return (
     <section className="section bg-white">
@@ -61,7 +75,8 @@ export default function SeriesSection({ locale }: { locale: Locale }) {
 
         <div
           id="additional-series"
-          className={`grid transition-[grid-template-rows,opacity,margin] duration-500 ease-out ${expanded ? "mt-5 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0"}`}
+          ref={additionalSeriesRef}
+          className={`grid scroll-mt-24 transition-[grid-template-rows,opacity,margin] duration-500 ease-out ${expanded ? "mt-5 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0"}`}
           aria-hidden={!expanded}
           inert={!expanded}
         >

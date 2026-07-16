@@ -12,17 +12,17 @@ export function HeroSection({ t }: { t: Translator }) {
       id="home"
       className="bg-white pb-6 pt-12 sm:pb-8 sm:pt-14 lg:pb-8 lg:pt-16"
     >
-      <div className="container-fluid grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
-        <div className="max-w-xl">
+      <div className="container-fluid grid gap-9 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+        <div className="max-w-[620px] lg:pr-6">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[.16em] text-primary-600">
-            {t("Vstupenky a placení na akcích")}
+            {t("Vstupenky. Platby. Zážitek.")}
           </p>
-          <h1 className="text-[38px] font-semibold leading-[1.09] tracking-[-.04em] text-primary-900 sm:text-[44px] lg:text-5xl">
-            {t("Na akci bez starostí. Od vstupenky až po poslední drink.")}
+          <h1 className="text-[42px] font-semibold leading-[1.06] tracking-[-.045em] text-primary-900 sm:text-[50px] lg:text-[54px]">
+            {t("Od vstupenky rovnou k zážitku.")}
           </h1>
-          <p className="mt-5 max-w-lg text-base leading-relaxed text-gray-500">
+          <p className="mt-5 max-w-lg text-[15px] leading-7 text-gray-500 sm:text-base">
             {t(
-              "Objevte akce a kupte si vstupenku jednoduše online. NFCtron vám podle typu akce pomůže také s rychlým vstupem, pohodlným placením nebo vrácením nevyužitého kreditu.",
+              "Objevte akce, kupte vstupenku a mějte vše důležité po ruce. Jednoduše před akcí, na místě i po ní.",
             )}
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
@@ -32,6 +32,16 @@ export function HeroSection({ t }: { t: Translator }) {
             <ActionLink href="https://pass.nfctron.com" variant="secondary">
               {t("Můj NFCtron")}
             </ActionLink>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[10px] font-medium text-gray-400">
+            <span className="inline-flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-primary-500" />
+              {t("Bezpečný nákup")}
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-primary-500" />
+              {t("Vstupenka v telefonu")}
+            </span>
           </div>
         </div>
         <EventCard event={featuredEvent} t={t} large />

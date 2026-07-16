@@ -196,6 +196,13 @@ const en: Record<string, string> = {
   "Nastavení cookies": "Cookie settings",
   "Na akcích bez zbytečných starostí.": "Effortless event experiences.",
   "Vstupenky a placení na akcích": "Tickets and event payments",
+  "Vstupenky. Platby. Zážitek.": "Tickets. Payments. Experiences.",
+  "Od vstupenky rovnou k zážitku.":
+    "From your ticket straight to the experience.",
+  "Objevte akce, kupte vstupenku a mějte vše důležité po ruce. Jednoduše před akcí, na místě i po ní.":
+    "Discover events, buy your ticket and keep everything important close at hand. Simple before, during and after the event.",
+  "Bezpečný nákup": "Secure checkout",
+  "Vstupenka v telefonu": "Ticket on your phone",
   "Na akci bez starostí. Od vstupenky až po poslední drink.":
     "Enjoy the event. From your ticket to the last drink.",
   "Objevte akce a kupte si vstupenku jednoduše online. NFCtron vám podle typu akce pomůže také s rychlým vstupem, pohodlným placením nebo vrácením nevyužitého kreditu.":
