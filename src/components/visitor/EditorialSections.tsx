@@ -24,10 +24,10 @@ export function BlogSection({ t }: { t: Translator }) {
             {t("Všechny články")} →
           </Link>
         </div>
-        <div className="mt-8 grid overflow-hidden rounded-2xl border border-gray-200 bg-white lg:grid-cols-[1.1fr_.9fr]">
+        <div className="mt-8 flex flex-col gap-8 lg:flex-row lg:items-stretch lg:gap-12">
           <Link
             href="https://www.nfctron.com/cs/blog/yashica-events-akvizice-rozsireni-podpory-akci"
-            className="group relative min-h-[360px] overflow-hidden lg:min-h-[480px]"
+            className="group relative min-h-[360px] overflow-hidden rounded-2xl lg:min-h-[480px] lg:flex-[1.15]"
           >
             <Image
               src="/yashica-events-acquisition.jpg"
@@ -51,13 +51,15 @@ export function BlogSection({ t }: { t: Translator }) {
               </p>
             </div>
           </Link>
-          <div className="grid divide-y divide-gray-200">
+          <div className="flex flex-1 flex-col justify-center">
             <BlogTeaser
+              t={t}
               date="27. 3. 2026"
               title="WHOOP UCI Mountain Bike World Series 2026"
               text="Nová sezóna, nové zážitky a atmosféra světového poháru v Novém Městě."
             />
             <BlogTeaser
+              t={t}
               date="5. 2. 2026"
               title="Masters of Rock 2026: Čtyři dny metalové vášně"
               text="Legendární festival se vrací do Vizovic už po dvaadvacáté."
@@ -70,10 +72,12 @@ export function BlogSection({ t }: { t: Translator }) {
 }
 
 function BlogTeaser({
+  t,
   date,
   title,
   text,
 }: {
+  t: Translator;
   date: string;
   title: string;
   text: string;
@@ -81,17 +85,17 @@ function BlogTeaser({
   return (
     <Link
       href="https://www.nfctron.com/cs/blog"
-      className="group flex flex-col justify-center p-7 transition hover:bg-primary-50 sm:p-9"
+      className="group border-t border-primary-900/10 py-7 first:border-t-0 lg:first:border-t"
     >
       <span className="text-xs font-semibold text-primary-500">
-        Pro návštěvníky · {date}
+        {t("Pro návštěvníky")} · {date}
       </span>
       <h3 className="mt-3 text-xl font-bold leading-snug text-primary-900 group-hover:text-primary-700">
         {title}
       </h3>
       <p className="mt-3 text-sm leading-relaxed text-gray-500">{text}</p>
       <span className="mt-5 text-sm font-semibold text-primary-700">
-        Přečíst článek →
+        {t("Přečíst článek")} →
       </span>
     </Link>
   );
@@ -101,8 +105,8 @@ export function SupportSection({ t }: { t: Translator }) {
   return (
     <section className="section scroll-mt-16 bg-white" id="support">
       <div className="container-fluid">
-        <div className="grid gap-6 lg:grid-cols-[.7fr_1.3fr] lg:items-start">
-          <div className="max-w-md">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
+          <div className="max-w-md lg:w-[38%]">
             <p className="text-xs font-semibold uppercase tracking-[.16em] text-primary-600">
               NFCtron Support
             </p>
@@ -121,27 +125,27 @@ export function SupportSection({ t }: { t: Translator }) {
               {t("Otevřít veškerou nápovědu")} <ArrowIcon />
             </Link>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="flex min-w-0 flex-1 flex-col border-t border-primary-900/10">
             {supportItems.map((item, index) => (
               <Link
                 key={item.title}
                 href={item.href}
-                className="group rounded-xl border border-gray-200 bg-white p-4 transition hover:border-primary-200 hover:bg-primary-50"
+                className="group flex items-center gap-5 border-b border-primary-900/10 py-5 transition hover:text-primary-700"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-100 text-[9px] font-semibold text-primary-700">
-                    0{index + 1}
-                  </span>
-                  <span className="text-gray-300 transition group-hover:translate-x-0.5 group-hover:text-primary-600">
-                    →
-                  </span>
+                <span className="text-[10px] font-semibold text-primary-400">
+                  0{index + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-sm font-semibold text-primary-900 group-hover:text-primary-700">
+                    {t(item.title)}
+                  </h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-gray-500">
+                    {t(item.text)}
+                  </p>
                 </div>
-                <h3 className="mt-4 text-sm font-semibold text-primary-900">
-                  {t(item.title)}
-                </h3>
-                <p className="mt-1.5 text-[11px] leading-relaxed text-gray-500">
-                  {t(item.text)}
-                </p>
+                <span className="shrink-0 text-gray-300 transition group-hover:translate-x-0.5 group-hover:text-primary-600">
+                  →
+                </span>
               </Link>
             ))}
           </div>

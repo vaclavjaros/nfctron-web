@@ -24,10 +24,13 @@ export default function EventsCatalogSection({ t }: { t: Translator }) {
               className="min-w-0 flex-1 bg-transparent text-sm text-gray-900 outline-none placeholder:text-gray-400"
             />
           </label>
-          <button className="flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-5 text-xs font-semibold text-gray-700 transition hover:border-primary-200 hover:bg-primary-50 hover:text-primary-700">
+          <Link
+            href="https://tickets.nfctron.com/home?locale=cs&category=all"
+            className="flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-gray-200 bg-gray-50 px-5 text-xs font-semibold text-gray-700 transition hover:border-primary-200 hover:bg-primary-50 hover:text-primary-700"
+          >
             <CalendarIcon />
             {t("Všechny akce")}
-          </button>
+          </Link>
         </div>
         <div className="mt-5 flex gap-1.5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {categories.map(([category, icon], index) => (
@@ -46,12 +49,26 @@ export default function EventsCatalogSection({ t }: { t: Translator }) {
             </button>
           ))}
         </div>
-        <div className="mt-3 grid gap-4 border-t border-gray-100 pt-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-3 flex snap-x gap-4 overflow-x-auto border-t border-gray-100 pb-4 pt-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {catalogEvents.map((event) => (
-            <EventCard key={event.id} event={event} t={t} />
+            <div
+              key={event.id}
+              className="w-[86%] shrink-0 snap-start sm:w-[48%] lg:w-[calc((100%_-_2rem)/3)]"
+            >
+              <EventCard event={event} t={t} />
+            </div>
           ))}
+        </div>
+        <div className="mt-4 flex justify-end">
+          <Link
+            href="https://tickets.nfctron.com/home?locale=cs&category=all"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 transition hover:text-primary-900"
+          >
+            {t("Zobrazit všechny akce")} <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </div>
     </section>
   );
 }
+import Link from "next/link";

@@ -9,58 +9,43 @@ const accountFeatures = [
   "Vrácení kreditu online",
   "Upozornění a novinky",
 ];
-const steps = [
-  [
-    "01",
-    "Kupte vstupenku",
-    "Bezpečně online, během několika minut a rovnou do vašeho účtu.",
-  ],
-  [
-    "02",
-    "Plaťte bez starostí",
-    "Čipem, kartou nebo mobilem. Rychle i tam, kde není internet.",
-  ],
-  [
-    "03",
-    "Vraťte si kredit",
-    "Zbytek peněz po akci pošlete zpět na účet přímo z aplikace.",
-  ],
-];
 
 export function AccountSection({ t }: { t: Translator }) {
   return (
     <section className="section bg-[#daebfa]" id="all-events">
       <div className="container-fluid">
-        <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-center">
-          <div>
-            <span className="hub-badge mb-5">{t("NFCtron účet")}</span>
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16">
+          <div className="lg:w-[42%]">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[.16em] text-primary-600">
+              {t("NFCtron účet")}
+            </p>
             <h2 className="section-title">
               {t("Celý zážitek na jednom místě.")}
             </h2>
-            <p className="max-w-lg text-base leading-relaxed text-gray-500">
-              Vstupenky, přehled útraty, hodnocení nákupů i nejrychlejší vrácení
-              zbylého kreditu. Bez hledání účtenek a formulářů.
+            <p className="max-w-lg text-sm leading-relaxed text-gray-500 sm:text-base">
+              {t(
+                "Vstupenky, platby a vrácení kreditu máte v jednom účtu. Bez hledání účtenek a formulářů.",
+              )}
             </p>
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            <ul className="mt-7 space-y-3">
               {accountFeatures.map((item, index) => (
-                <div
-                  key={item}
-                  className="ticket-panel flex items-center gap-3 p-4"
-                >
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary-100 text-xs font-bold text-primary-700">
+                <li key={item} className="flex items-center gap-4 text-sm">
+                  <span className="text-[10px] font-semibold text-primary-500">
                     0{index + 1}
                   </span>
-                  <span className="text-sm font-semibold text-gray-800">
+                  <span className="font-semibold text-primary-900">
                     {t(item)}
                   </span>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
             <Link href="https://pass.nfctron.com" className="btn-primary mt-7">
               {t("Otevřít můj NFCtron účet")} <ArrowIcon />
             </Link>
           </div>
-          <AccountPreview />
+          <div className="min-w-0 flex-1">
+            <AccountPreview />
+          </div>
         </div>
       </div>
     </section>
@@ -104,34 +89,6 @@ function AccountPreview() {
         </p>
       </div>
     </div>
-  );
-}
-
-export function HowItWorksSection({ t }: { t: Translator }) {
-  return (
-    <section id="how-it-works" className="section scroll-mt-16 bg-white">
-      <div className="container-fluid text-center">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[.16em] text-primary-600">
-          {t("NFCtron na akcích")}
-        </p>
-        <h2 className="section-title">{t("Méně čekání. Více zážitků.")}</h2>
-        <div className="mt-10 grid gap-px overflow-hidden rounded-xl border border-gray-200 bg-gray-200 text-left md:grid-cols-3">
-          {steps.map(([number, title, copy]) => (
-            <div key={number} className="bg-white p-7">
-              <span className="text-xs font-semibold text-primary-500">
-                {number}
-              </span>
-              <h3 className="mt-6 text-xl font-semibold text-primary-900">
-                {t(title)}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-gray-500">
-                {t(copy)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }
 

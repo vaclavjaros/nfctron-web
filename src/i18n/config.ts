@@ -245,9 +245,14 @@ const en: Record<string, string> = {
   "Sériová akce": "Event series",
   "Příští sezóna začíná teď": "Next season starts now",
   "Akce, na které se těšíme v roce 2027": "Events we look forward to in 2027",
-  "První festivaly a koncerty jsou v prodeji. Vyberte si včas a mějte příští léto naplánované.":
-    "The first festivals and concerts are on sale. Choose early and start planning next summer.",
+  "Vybrané akce pro rok 2027 už jsou v prodeji. Objevte, co se chystá, a vyberte si s předstihem.":
+    "Selected 2027 events are already on sale. See what is coming and choose your plans ahead of time.",
   "V prodeji na rok 2027": "On sale for 2027",
+  "Prohlédnout všechny akce 2027": "Explore all 2027 events",
+  "25.–27. června · Letiště Tábor": "25–27 June · Tábor Airport",
+  "22. května · Praha": "22 May · Prague",
+  "Plzeň · Amfiteátr Lochotín": "Pilsen · Lochotín Amphitheatre",
+  "Zobrazit pořadatele": "View organizer",
   "Vše důležité pro návštěvníky": "Everything visitors need",
   "NFCtron drží celý zážitek pohromadě.":
     "NFCtron keeps the whole experience together.",
@@ -260,10 +265,20 @@ const en: Record<string, string> = {
   "Vrácení kreditu": "Credit refunds",
   "Nevyužité peníze po akci odešlete zpět přímo online.":
     "Send unused funds back after the event directly online.",
+  "Před akcí": "Before the event",
+  "Vstupenka v telefonu, informace na jednom místě a žádné hledání v e-mailu.":
+    "Your ticket on your phone, all key details in one place and no searching through email.",
+  "Na místě": "At the event",
+  "Rychlý vstup a podle typu akce pohodlné placení čipem, kartou nebo telefonem.":
+    "Fast entry and, depending on the event, easy payment by chip, card or phone.",
+  "Po akci": "After the event",
+  "Přehled plateb, online účtenka a jednoduché vrácení nevyužitého kreditu.":
+    "Payment history, online receipts and a simple refund of unused credit.",
   "Najděte svůj další zážitek": "Find your next experience",
   "Vstupenky v prodeji": "Tickets on sale",
   "Vyhledejte akce podle názvu nebo místa…": "Search events by name or place…",
   "Všechny akce": "All events",
+  "Zobrazit všechny akce": "View all events",
   Vše: "All",
   "Výběr NFCtron": "NFCtron picks",
   "Výhodnější vstupenky": "Better-value tickets",
@@ -330,6 +345,8 @@ const en: Record<string, string> = {
     "Learn how to regain access to your online receipt and chip.",
   "NFCtron účet": "NFCtron account",
   "Celý zážitek na jednom místě.": "Your whole experience in one place.",
+  "Vstupenky, platby a vrácení kreditu máte v jednom účtu. Bez hledání účtenek a formulářů.":
+    "Keep tickets, payments and credit refunds in one account. No searching for receipts or forms.",
   "Všechny vstupenky po ruce": "All tickets at hand",
   "Přehled plateb na akci": "Event payment overview",
   "Vrácení kreditu online": "Online credit refunds",

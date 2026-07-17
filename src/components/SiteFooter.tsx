@@ -11,19 +11,19 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
 
   return (
     <footer className="bg-primary-900 text-white">
-      <div className="container-fluid py-12 sm:py-14">
-        <div className="grid gap-10 border-b border-white/10 pb-10 sm:grid-cols-2 lg:grid-cols-[1.55fr_1fr_1fr_1fr] lg:gap-14">
-          <div className="max-w-sm">
+      <div className="container-fluid py-10 sm:py-12">
+        <div className="grid gap-9 border-b border-white/10 pb-9 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-12">
+          <div className="max-w-xs">
             <Image
               src="/nfctron-logo-white.svg"
               alt="NFCtron"
-              width={112}
-              height={22}
+              width={104}
+              height={20}
             />
-            <h2 className="mt-7 max-w-xs text-2xl font-semibold leading-tight tracking-[-0.04em]">
+            <h2 className="mt-5 max-w-[260px] text-lg font-semibold leading-snug tracking-[-0.03em] sm:text-xl">
               {t("Celý svět akcí v jednom ekosystému.")}
             </h2>
-            <p className="mt-4 max-w-xs text-xs leading-6 text-white/55">
+            <p className="mt-3 max-w-[280px] text-[11px] leading-5 text-white/50">
               {t(
                 "Vstupenky, platby a technologie, které propojují návštěvníky, pořadatele, prodejce a interprety.",
               )}

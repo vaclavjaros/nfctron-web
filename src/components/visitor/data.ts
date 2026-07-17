@@ -61,6 +61,7 @@ export const events: EventItem[] = [
     city: "Česko",
     category: "Koncert",
     accent: "from-sky-800 via-blue-500 to-cyan-300",
+    url: "https://vstupenky.chinaski.cz/",
   },
   {
     id: "techmission-2026",
@@ -159,9 +160,7 @@ export const catalogEvents = [
   "machac-2026",
   "26-sunset-tour-praha",
   "let-it-roll-2026",
-  "mighty-sounds-2027",
   "chinaski-open-air",
-  "90s-explosion",
 ]
   .map((id) => events.find((event) => event.id === id))
   .filter((event): event is EventItem => Boolean(event));
@@ -229,6 +228,8 @@ export const events2027: PromoItem[] = [
     accent: "from-purple-950 via-lime-700 to-lime-300",
     image:
       "https://images.nfctron.com/organizers/5101aa82-c8a3-46bb-a68f-1c2657e59726.png",
+    action: "Vybrat vstupenky",
+    url: "https://tickets.nfctron.com/event/msfh-2010/mighty-sounds-2027-czk/cart",
   },
   {
     title: "90s Explosion 2027",
@@ -236,6 +237,8 @@ export const events2027: PromoItem[] = [
     accent: "from-fuchsia-950 via-pink-600 to-yellow-300",
     image:
       "https://images.nfctron.com/organizers/b4b3fa28-912c-421f-ac0f-8b88f5541699.png",
+    action: "Vybrat vstupenky",
+    url: "https://tickets.nfctron.com/event/90s-explosion/open-air-festival-2027/cart",
   },
   {
     title: "Metalfest Open Air 2027",
@@ -243,6 +246,17 @@ export const events2027: PromoItem[] = [
     accent: "from-neutral-950 via-red-900 to-orange-400",
     image:
       "https://images.nfctron.com/organizers/179d2e51-6b5b-49cf-abb5-5502315b3a1f.png",
+    action: "Zobrazit pořadatele",
+    url: "https://tickets.nfctron.com/organizer/pragokoncert-bohemia",
+  },
+  {
+    title: "Pam Rabbit – planet 33 tour 2027",
+    meta: "5 měst · únor 2027",
+    accent: "from-fuchsia-950 via-violet-700 to-cyan-400",
+    image:
+      "https://images.nfctron.com/event-groups/084a9bee-2abd-4e90-9bda-6f688cc570a8.png",
+    action: "Vybrat město",
+    url: "https://tickets.nfctron.com/tour/pam-rabbit-planet-33-tour-2027",
   },
 ];
 

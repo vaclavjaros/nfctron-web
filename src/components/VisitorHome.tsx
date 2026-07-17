@@ -1,11 +1,7 @@
 import CampaignFeature from "./CampaignFeature";
 import SiteFooter from "./SiteFooter";
 import SiteHeader from "./SiteHeader";
-import {
-  AccountSection,
-  HowItWorksSection,
-  OrganizerCta,
-} from "./visitor/AccountSections";
+import { AccountSection, OrganizerCta } from "./visitor/AccountSections";
 import {
   BenefitsSection,
   CollectionsSections,
@@ -30,12 +26,11 @@ export default async function VisitorHome({ locale }: { locale: Locale }) {
         <EventTrendsSection groups={eventTrendGroups} locale={locale} />
         <CampaignFeature campaign={clickToPayCampaign} locale={locale} />
         <CollectionsSections t={t} locale={locale} />
-        <BenefitsSection t={t} />
         <EventsCatalogSection t={t} />
+        <BenefitsSection t={t} />
+        <AccountSection t={t} />
         <BlogSection t={t} />
         <SupportSection t={t} />
-        <AccountSection t={t} />
-        <HowItWorksSection t={t} />
         <OrganizerCta t={t} />
       </main>
       <SiteFooter locale={locale} />
