@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL } from "@/config/site";
+import { SITE_INDEXING_ENABLED, SITE_URL } from "@/config/site";
 import type { Locale } from "@/i18n/config";
 
 interface PageMetadataOptions {
@@ -58,7 +58,9 @@ export function createPageMetadata({
     title,
     description,
     alternates: { canonical: canonicalUrl },
-    robots: { index: true, follow: true },
+    robots: SITE_INDEXING_ENABLED
+      ? { index: true, follow: true }
+      : { index: false, follow: false, nocache: true },
     openGraph: {
       title: shareTitle,
       description,
