@@ -4,7 +4,9 @@ import Link from "next/link";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
 import { AudienceHeroSection } from "@/components/audience/AudiencePage";
+import ActionLink from "@/components/ui/ActionLink";
 import type { Locale } from "@/i18n/config";
+import { localizedPath } from "@/i18n/routing";
 
 type CompanyUnit = {
   name: string;
@@ -19,63 +21,63 @@ const copy = {
       eyebrow: "Jeden propojený ekosystém",
       title: "Nejsme jedna služba. Stavíme infrastrukturu pro celý svět akcí.",
       description:
-        "Technologie. Platby. Produkce. Hudba. Marketing. Jeden propojený ekosystém.",
+        "Technologie, platby, produkce, hudba, marketing a prodejci v jednom funkčním celku.",
     },
     ecosystem: {
-      eyebrow: "Skupina NFCtron",
+      eyebrow: "Role ve skupině",
       title: "Specializované části. Jeden směr.",
       description:
         "Každá část má vlastní roli. Dohromady pokrývají celý životní cyklus akce.",
       core: {
         name: "NFCtron a.s.",
-        role: "Technologie, ticketing a provoz akcí",
-        detail: "Jádro, které propojuje návštěvníky, pořadatele a provoz v jeden celek.",
+        role: "Technologie, ticketing a provoz akcí v jednom systému.",
+        detail: "Jádro skupiny pro návštěvníky, pořadatele a provoz.",
       },
       pay: {
         name: "NFCtron Pay a.s.",
-        role: "Platební infrastruktura a finanční produkty",
+        role: "Platby, karetní infrastruktura a nové finanční služby pro svět akcí.",
       },
       ventures: {
         name: "NFCtron Ventures s.r.o.",
-        role: "Investice a rozvoj nových projektů",
+        role: "Investice do projektů, které rozšiřují svět akcí.",
       },
       production: {
         name: "NFCtron Production s.r.o.",
-        role: "Produkce živých akcí",
+        role: "Produkční zázemí pro interprety, hudbu a realizaci živých akcí.",
       },
       yashica: {
         name: "Yashica Events a.s.",
-        role: "Festivaly, koncerty a turné",
+        role: "Festivaly, koncertní turné a zkušenosti z reálného provozu.",
         label: "Součást NFCtron Production",
       },
       marketing: {
         name: "NFCtron Marketing s.r.o.",
-        role: "Hudba, značky, obsah a interpreti",
+        role: "Rozvoj interpretů, hudby, značek a obsahu.",
       },
     },
     direction: {
-      eyebrow: "Jeden ekosystém",
+      eyebrow: "Jak vzniká hodnota",
       title: "Od prvního ticketu po poslední světlo na stage.",
       items: [
         {
           number: "01",
-          title: "Technologie",
-          description: "Systémy, které propojují celý životní cyklus akce.",
+          title: "Prodej a vztah s návštěvníkem",
+          description: "Ticketing, obsah a komunikace před začátkem akce.",
         },
         {
           number: "02",
-          title: "Realizace",
-          description: "Produkce a zkušenosti z reálného provozu.",
+          title: "Provoz a platby",
+          description: "Vstup, platby a technologie přímo na místě.",
         },
         {
           number: "03",
-          title: "Růst",
-          description: "Nové projekty, hudba, značky a další možnosti pro eventový svět.",
+          title: "Produkce a růst",
+          description: "Realizace, hudba, značky a nové projekty po celý rok.",
         },
       ],
     },
     news: {
-      eyebrow: "Dění ve skupině",
+      eyebrow: "Aktuálně ve skupině",
       title: "NFCtron dokončil akvizici Yashica Events.",
       description:
         "Skupina tak propojuje vlastní technologie s produkčními zkušenostmi z festivalů, koncertů a turné — a rozšiřuje podporu pořadatelům akcí.",
@@ -86,8 +88,12 @@ const copy = {
       href: "https://www.nfctron.com/cs/blog/yashica-events-akvizice-rozsireni-podpory-akci",
     },
     close: {
-      title: "Jednotlivé části mají vlastní roli. Společně posouvají celý svět akcí.",
-      statement: "Tohle je ekosystém NFCtron.",
+      eyebrow: "Pro váš projekt",
+      title: "Jedna skupina. Správné části pro váš projekt.",
+      description:
+        "Ať připravujete akci, hledáte technologického partnera nebo chcete rozvíjet nový projekt, spojíme vás s týmem, který dává smysl.",
+      organizerCta: "Najít správné řešení",
+      contactCta: "Kontaktovat NFCtron",
     },
   },
   en: {
@@ -96,63 +102,63 @@ const copy = {
       eyebrow: "One connected ecosystem",
       title: "We are not a single service. We are building infrastructure for the entire world of events.",
       description:
-        "Technology. Payments. Production. Music. Marketing. One connected ecosystem.",
+        "Technology, payments, production, music, marketing and vendors working as one.",
     },
     ecosystem: {
-      eyebrow: "NFCtron Group",
+      eyebrow: "Roles across the group",
       title: "Specialized capabilities. One direction.",
       description:
         "Every part has its own role. Together, they cover the complete event lifecycle.",
       core: {
         name: "NFCtron a.s.",
-        role: "Technology, ticketing and event operations",
-        detail: "The core connecting visitors, organizers and operations into one system.",
+        role: "Technology, ticketing and event operations in one system.",
+        detail: "The group core for visitors, organizers and operations.",
       },
       pay: {
         name: "NFCtron Pay a.s.",
-        role: "Payment infrastructure and financial products",
+        role: "Payments, card infrastructure and new financial services for events.",
       },
       ventures: {
         name: "NFCtron Ventures s.r.o.",
-        role: "Investment and development of new projects",
+        role: "Investment in projects that expand the world of events.",
       },
       production: {
         name: "NFCtron Production s.r.o.",
-        role: "Live event production",
+        role: "Production support for artists, music and the delivery of live events.",
       },
       yashica: {
         name: "Yashica Events a.s.",
-        role: "Festivals, concerts and tours",
+        role: "Festivals, concert tours and experience from real event operations.",
         label: "Part of NFCtron Production",
       },
       marketing: {
         name: "NFCtron Marketing s.r.o.",
-        role: "Music, brands, content and artists",
+        role: "Development of artists, music, brands and content.",
       },
     },
     direction: {
-      eyebrow: "One ecosystem",
+      eyebrow: "How value is created",
       title: "From the first ticket to the last light on stage.",
       items: [
         {
           number: "01",
-          title: "Technology",
-          description: "Systems connecting the complete event lifecycle.",
+          title: "Sales and visitor relationships",
+          description: "Ticketing, content and communication before the event begins.",
         },
         {
           number: "02",
-          title: "Delivery",
-          description: "Production shaped by experience from real event operations.",
+          title: "Operations and payments",
+          description: "Entry, payments and technology directly at the event.",
         },
         {
           number: "03",
-          title: "Growth",
-          description: "New projects, music, brands and new possibilities for the event world.",
+          title: "Production and growth",
+          description: "Delivery, music, brands and new projects throughout the year.",
         },
       ],
     },
     news: {
-      eyebrow: "Inside the group",
+      eyebrow: "Latest from the group",
       title: "NFCtron completes the acquisition of Yashica Events.",
       description:
         "The group now connects its technology with hands-on production experience from festivals, concerts and tours — expanding support for event organizers.",
@@ -163,8 +169,12 @@ const copy = {
       href: "https://www.nfctron.com/cs/blog/yashica-events-akvizice-rozsireni-podpory-akci",
     },
     close: {
-      title: "Every part has its own role. Together, they move the entire world of events forward.",
-      statement: "This is the NFCtron ecosystem.",
+      eyebrow: "For your project",
+      title: "One group. The right capabilities for your project.",
+      description:
+        "Whether you are preparing an event, looking for a technology partner or developing a new project, we will connect you with the right team.",
+      organizerCta: "Find the right solution",
+      contactCta: "Contact NFCtron",
     },
   },
 } satisfies Record<Locale, object>;
@@ -192,31 +202,19 @@ export default function CompanyStructureHome({ locale }: { locale: Locale }) {
               </p>
             </div>
 
-            <div className="relative mt-10 overflow-hidden rounded-[28px] bg-[radial-gradient(circle_at_50%_46%,rgba(51,74,255,0.12),transparent_31%),linear-gradient(145deg,#eef1fa_0%,#f8f9fc_52%,#eef1fa_100%)] p-4 sm:mt-12 sm:p-6 lg:p-8">
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/10 blur-3xl" />
-              <div className="relative grid gap-4 md:grid-cols-2 lg:grid-cols-[1fr_1.12fr_1fr] lg:grid-rows-2">
-                <CompanyCard
-                  unit={c.ecosystem.core}
-                  tone="core"
-                  className="order-1 md:col-span-2 lg:col-span-1 lg:col-start-2 lg:row-span-2 lg:row-start-1"
-                />
-                <CompanyCard
-                  unit={c.ecosystem.pay}
-                  className="order-2 lg:col-start-1 lg:row-start-1"
-                />
-                <CompanyCard
-                  unit={c.ecosystem.ventures}
-                  className="order-3 lg:col-start-1 lg:row-start-2"
-                />
+            <div className="mt-10 sm:mt-12">
+              <div className="mx-auto max-w-[720px]">
+                <CompanyCard unit={c.ecosystem.core} tone="core" />
+              </div>
+
+              <div className="mt-5 grid gap-4 sm:mt-6 md:grid-cols-2">
+                <CompanyCard unit={c.ecosystem.pay} />
+                <CompanyCard unit={c.ecosystem.ventures} />
                 <ProductionCard
                   production={c.ecosystem.production}
                   yashica={c.ecosystem.yashica}
-                  className="order-4 lg:col-start-3 lg:row-start-1"
                 />
-                <CompanyCard
-                  unit={c.ecosystem.marketing}
-                  className="order-5 lg:col-start-3 lg:row-start-2"
-                />
+                <CompanyCard unit={c.ecosystem.marketing} />
               </div>
             </div>
           </div>
@@ -230,22 +228,29 @@ export default function CompanyStructureHome({ locale }: { locale: Locale }) {
             <h2 className="mt-4 max-w-[760px] text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
               {c.direction.title}
             </h2>
-            <div className="mt-10 grid gap-4 md:grid-cols-3 sm:mt-12">
-              {c.direction.items.map((item) => (
-                <article
-                  key={item.number}
-                  className="rounded-2xl bg-white/[0.055] p-6 transition-colors duration-300 hover:bg-white/[0.085] sm:p-8"
-                >
-                  <span className="text-[10px] font-semibold text-blue-300">
-                    {item.number}
-                  </span>
-                  <h3 className="mt-10 text-xl font-semibold tracking-[-0.035em]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-6 text-white/55">
-                    {item.description}
-                  </p>
-                </article>
+            <div className="mt-12 flex flex-col gap-9 md:flex-row md:items-start md:gap-5 lg:gap-8">
+              {c.direction.items.map((item, index) => (
+                <div key={item.number} className="contents">
+                  <article className="min-w-0 flex-1">
+                    <span className="text-[10px] font-semibold text-blue-300">
+                      {item.number}
+                    </span>
+                    <h3 className="mt-6 text-xl font-semibold tracking-[-0.035em] sm:text-2xl">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 max-w-[320px] text-sm leading-6 text-white/55">
+                      {item.description}
+                    </p>
+                  </article>
+                  {index < c.direction.items.length - 1 ? (
+                    <span
+                      className="hidden pt-[78px] text-lg text-white/25 md:block"
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  ) : null}
+                </div>
               ))}
             </div>
           </div>
@@ -300,13 +305,24 @@ export default function CompanyStructureHome({ locale }: { locale: Locale }) {
               </article>
             </Link>
 
-            <div className="mx-auto mt-20 max-w-[880px] text-center sm:mt-24 lg:mt-28">
-              <h2 className="text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
+            <div className="mx-auto mt-20 max-w-[820px] rounded-[28px] bg-[#f6f7fb] px-6 py-12 text-center sm:mt-24 sm:px-10 sm:py-16 lg:mt-28">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700">
+                {c.close.eyebrow}
+              </p>
+              <h2 className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.045em] sm:text-4xl lg:text-5xl">
                 {c.close.title}
               </h2>
-              <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-blue-700">
-                {c.close.statement}
+              <p className="mx-auto mt-5 max-w-[650px] text-sm leading-7 text-gray-500 sm:text-base">
+                {c.close.description}
               </p>
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <ActionLink href={localizedPath(locale, "/for-organizers")} arrow>
+                  {c.close.organizerCta}
+                </ActionLink>
+                <ActionLink href="mailto:info@nfctron.com" variant="secondary" arrow>
+                  {c.close.contactCta}
+                </ActionLink>
+              </div>
             </div>
           </div>
         </section>
@@ -329,10 +345,10 @@ function CompanyCard({
 
   return (
     <article
-      className={`${className} flex min-h-[184px] flex-col justify-between rounded-2xl p-6 transition-transform duration-300 motion-safe:hover:-translate-y-1 sm:p-7 ${
+      className={`${className} flex min-h-[196px] flex-col justify-between rounded-2xl p-6 transition-transform duration-300 motion-safe:hover:-translate-y-1 sm:p-7 ${
         isCore
-          ? "bg-primary-900 text-white shadow-xl shadow-primary-900/15 lg:min-h-full"
-          : "bg-white/90 shadow-sm shadow-primary-900/5"
+          ? "bg-primary-900 text-white shadow-xl shadow-primary-900/15 sm:min-h-[220px] sm:px-9 sm:py-8"
+          : "bg-white shadow-sm shadow-primary-900/5"
       }`}
     >
       <span
@@ -359,22 +375,22 @@ function CompanyCard({
 function ProductionCard({
   production,
   yashica,
-  className,
+  className = "",
 }: {
   production: CompanyUnit;
   yashica: CompanyUnit & { label: string };
-  className: string;
+  className?: string;
 }) {
   return (
     <article
-      className={`${className} rounded-2xl bg-white/90 p-6 shadow-sm shadow-primary-900/5 transition-transform duration-300 motion-safe:hover:-translate-y-1 sm:p-7`}
+      className={`${className} min-h-[196px] rounded-2xl bg-white p-6 shadow-sm shadow-primary-900/5 transition-transform duration-300 motion-safe:hover:-translate-y-1 sm:p-7`}
     >
       <span className="block h-2 w-2 rounded-full bg-blue-600/70" aria-hidden="true" />
       <h3 className="mt-10 text-xl font-semibold tracking-[-0.035em]">
         {production.name}
       </h3>
       <p className="mt-2 text-sm leading-6 text-gray-500">{production.role}</p>
-      <div className="mt-6 rounded-xl bg-primary-50 p-4">
+      <div className="mt-6 rounded-xl bg-primary-50 p-4 sm:p-5">
         <span className="text-[8px] font-semibold uppercase tracking-[0.13em] text-primary-500">
           {yashica.label}
         </span>
