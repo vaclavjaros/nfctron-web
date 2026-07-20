@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import LanguageMenu from "./LanguageMenu";
 import { translate, type Locale } from "@/i18n/config";
 import { localizedPath } from "@/i18n/routing";
@@ -22,8 +22,10 @@ interface SiteHeaderProps {
   active?: SiteMode;
 }
 
+type NavigableMode = Exclude<SiteMode, "company">;
+
 const MODES: Array<{
-  id: SiteMode;
+  id: NavigableMode;
   label: string;
   href: string;
   beta?: boolean;
@@ -37,72 +39,156 @@ const MODES: Array<{
   { id: "production", label: "Produkce", href: "/production" },
 ];
 
-const ORGANIZER_MENU = {
+type MegaMenuCopy = {
+  ariaLabel: string;
+  back: string;
+  overview: string;
+  overviewDescription: string;
+  groups: Array<{
+    title: string;
+    links: Array<readonly [label: string, href: string]>;
+  }>;
+};
+
+const MENU_COPY: Record<Locale, Record<NavigableMode, MegaMenuCopy>> = {
   cs: {
-    ariaLabel: "Služby a produkty pro pořadatele",
-    back: "Zpět",
-    overview: "Přehled pro pořadatele",
-    overviewDescription: "Jeden partner pro ticketing, platby a provoz akce.",
-    groups: [
-      {
-        title: "Produkty",
-        links: [
-          ["Ticketing a vstup", "/for-organizers#ecosystem"],
-          ["Platby na akci", "/for-organizers#payments"],
-          ["NFCtron Hub", "/for-organizers#ecosystem"],
-        ],
-      },
-      {
-        title: "Služby",
-        links: [
-          ["Provoz na místě", "/for-organizers#operations"],
-          ["Prodejci a gastro", "/for-retailers"],
-          ["Produkce akce", "/production"],
-        ],
-      },
-      {
-        title: "Začít",
-        links: [
-          ["Poptat řešení", "/for-organizers#contact"],
-          ["Jak spolupráce probíhá", "/for-organizers#journey"],
-          ["Akce s NFCtron", "/#events"],
-        ],
-      },
-    ],
+    home: {
+      ariaLabel: "Pro návštěvníky",
+      back: "Zpět",
+      overview: "Přehled pro návštěvníky",
+      overviewDescription: "Akce, vstupenky a zážitky v jednom propojeném světě.",
+      groups: [
+        { title: "Objevovat", links: [["Akce v prodeji", "/#events"], ["Sériové akce", "/#series"], ["Akce 2027", "/#next-season"]] },
+        { title: "Můj NFCtron", links: [["Jak to funguje", "/#how-it-works"], ["NFCtron Card", "/cards"], ["Podpora návštěvníků", "/#support"]] },
+        { title: "Další zážitky", links: [["Interpreti", "/for-artists"], ["Hudba", "/music"], ["Produkce", "/production"]] },
+      ],
+    },
+    organizers: {
+      ariaLabel: "Služby a produkty pro pořadatele",
+      back: "Zpět",
+      overview: "Přehled pro pořadatele",
+      overviewDescription: "Jeden partner pro ticketing, platby a provoz akce.",
+      groups: [
+        { title: "Produkty", links: [["Ticketing a vstup", "/for-organizers#ecosystem"], ["Platby na akci", "/for-organizers#payments"], ["NFCtron Hub", "/for-organizers#ecosystem"]] },
+        { title: "Služby", links: [["Provoz na místě", "/for-organizers#operations"], ["Prodejci a gastro", "/for-retailers"], ["Produkce akce", "/production"]] },
+        { title: "Začít", links: [["Poptat řešení", "/for-organizers#contact"], ["Jak spolupráce probíhá", "/for-organizers#journey"], ["Akce s NFCtron", "/#events"]] },
+      ],
+    },
+    retailers: {
+      ariaLabel: "Prodejci a marketplace",
+      back: "Zpět",
+      overview: "Přehled pro prodejce",
+      overviewDescription: "Příležitosti pro prodejce a ověřená síť pro pořadatele.",
+      groups: [
+        { title: "Marketplace", links: [["Jak marketplace funguje", "/for-retailers#marketplace"], ["Aktivní akce", "/for-retailers#active-events"], ["Aktivní prodejci", "/for-retailers#active-retailers"]] },
+        { title: "Pro prodejce", links: [["Chci prodávat na akcích", "/for-retailers#active-events"], ["Provozní podpora", "/for-retailers#guarantee"], ["NFCtron Hub", "/for-retailers#marketplace"]] },
+        { title: "Pro pořadatele", links: [["Hledám prodejce", "/for-retailers#active-retailers"], ["Gastro partner", "/for-retailers#partner"], ["Poptat spolupráci", "/for-retailers#contact"]] },
+      ],
+    },
+    artists: {
+      ariaLabel: "Interpreti a booking",
+      back: "Zpět",
+      overview: "NFCtron Artists",
+      overviewDescription: "Booking, hudba, vstupenky a rozvoj interpretů.",
+      groups: [
+        { title: "Interpreti", links: [["Sebastian", "/for-artists/sebastian"], ["Elizabeth Kopecká", "/for-artists/elizabeth-kopecka"], ["Like-It", "/for-artists/like-it"]] },
+        { title: "Pro interprety", links: [["Rozvoj projektu", "/for-artists#pro-interprety"], ["Hudba a distribuce", "/music"], ["NFCtron Card Artist Edition", "/cards#artist-edition"]] },
+        { title: "Pro pořadatele", links: [["Poptat interpreta", "/for-artists#booking"], ["Jak booking funguje", "/for-artists#pro-poradatele"], ["Produkce koncertu", "/production"]] },
+      ],
+    },
+    music: {
+      ariaLabel: "NFCtron Music",
+      back: "Zpět",
+      overview: "NFCtron Music",
+      overviewDescription: "Od studia přes release až ke koncertnímu pódiu.",
+      groups: [
+        { title: "Poslouchat", links: [["Aktuální releasy", "/music#releases"], ["Elizabeth Kopecká", "/for-artists/elizabeth-kopecka"], ["Interpreti NFCtron", "/for-artists"]] },
+        { title: "Pro interprety", links: [["Vydat hudbu", "/music#distribution"], ["Hudební distribuce", "/music#distribution"], ["Prodat hudbu v Hi-Res", "/music#music-store"]] },
+        { title: "Propojený svět", links: [["Artist Edition", "/cards#artist-edition"], ["Booking", "/for-artists#booking"], ["Koncertní produkce", "/production"]] },
+      ],
+    },
+    cards: {
+      ariaLabel: "NFCtron Card",
+      back: "Zpět",
+      overview: "NFCtron Card",
+      overviewDescription: "Jedna karta pro vstupenky, refundace a nové zážitky.",
+      groups: [
+        { title: "Edice", links: [["Artist Edition", "/cards#artist-edition"], ["Festival Edition", "/cards#festival-edition"], ["Vysočina Fest 2027", "/cards#festival-edition"]] },
+        { title: "Jak funguje", links: [["Aktivace karty", "/cards#how-it-works"], ["Výhody karty", "/cards#features"], ["Bezpečnost a refundace", "/cards#features"]] },
+        { title: "Začít", links: [["Aktivovat kartu", "/cards#how-it-works"], ["Vybrat si interpreta", "/for-artists"], ["Vybrat si akci", "/#events"]] },
+      ],
+    },
+    production: {
+      ariaLabel: "Produkce akcí",
+      back: "Zpět",
+      overview: "NFCtron Production",
+      overviewDescription: "Vlastní kapacity a ověření partneři v jednom produkčním týmu.",
+      groups: [
+        { title: "Realizace", links: [["Jak produkce funguje", "/production#process"], ["Rozsah produkce", "/production#scope"], ["Provoz na místě", "/for-organizers#operations"]] },
+        { title: "Propojení", links: [["Pro pořadatele", "/for-organizers"], ["Prodejci a gastro", "/for-retailers"], ["Interpreti a hudba", "/for-artists"]] },
+        { title: "Spolupráce", links: [["Poptat produkci", "/production#partner"], ["Stát se partnerem", "/production#partner"], ["NFCtron Production", "/company-structure"]] },
+      ],
+    },
   },
   en: {
-    ariaLabel: "Services and products for organizers",
-    back: "Back",
-    overview: "For organizers",
-    overviewDescription: "One partner for ticketing, payments and event operations.",
-    groups: [
-      {
-        title: "Products",
-        links: [
-          ["Ticketing and entry", "/for-organizers#ecosystem"],
-          ["Event payments", "/for-organizers#payments"],
-          ["NFCtron Hub", "/for-organizers#ecosystem"],
-        ],
-      },
-      {
-        title: "Services",
-        links: [
-          ["On-site operations", "/for-organizers#operations"],
-          ["Vendors and hospitality", "/for-retailers"],
-          ["Event production", "/production"],
-        ],
-      },
-      {
-        title: "Get started",
-        links: [
-          ["Request a solution", "/for-organizers#contact"],
-          ["How we work", "/for-organizers#journey"],
-          ["Events with NFCtron", "/#events"],
-        ],
-      },
-    ],
+    home: {
+      ariaLabel: "For visitors", back: "Back", overview: "For visitors", overviewDescription: "Events, tickets and experiences in one connected world.",
+      groups: [
+        { title: "Discover", links: [["Events on sale", "/#events"], ["Event series", "/#series"], ["Events in 2027", "/#next-season"]] },
+        { title: "My NFCtron", links: [["How it works", "/#how-it-works"], ["NFCtron Card", "/cards"], ["Visitor support", "/#support"]] },
+        { title: "More experiences", links: [["Artists", "/for-artists"], ["Music", "/music"], ["Production", "/production"]] },
+      ],
+    },
+    organizers: {
+      ariaLabel: "Services and products for organizers", back: "Back", overview: "For organizers", overviewDescription: "One partner for ticketing, payments and event operations.",
+      groups: [
+        { title: "Products", links: [["Ticketing and entry", "/for-organizers#ecosystem"], ["Event payments", "/for-organizers#payments"], ["NFCtron Hub", "/for-organizers#ecosystem"]] },
+        { title: "Services", links: [["On-site operations", "/for-organizers#operations"], ["Vendors and hospitality", "/for-retailers"], ["Event production", "/production"]] },
+        { title: "Get started", links: [["Request a solution", "/for-organizers#contact"], ["How we work", "/for-organizers#journey"], ["Events with NFCtron", "/#events"]] },
+      ],
+    },
+    retailers: {
+      ariaLabel: "Vendors and marketplace", back: "Back", overview: "For vendors", overviewDescription: "Sales opportunities for vendors and a trusted network for organizers.",
+      groups: [
+        { title: "Marketplace", links: [["How marketplace works", "/for-retailers#marketplace"], ["Active events", "/for-retailers#active-events"], ["Active vendors", "/for-retailers#active-retailers"]] },
+        { title: "For vendors", links: [["Sell at events", "/for-retailers#active-events"], ["Operational support", "/for-retailers#guarantee"], ["NFCtron Hub", "/for-retailers#marketplace"]] },
+        { title: "For organizers", links: [["Find vendors", "/for-retailers#active-retailers"], ["Hospitality partner", "/for-retailers#partner"], ["Request cooperation", "/for-retailers#contact"]] },
+      ],
+    },
+    artists: {
+      ariaLabel: "Artists and booking", back: "Back", overview: "NFCtron Artists", overviewDescription: "Booking, music, ticketing and long-term artist development.",
+      groups: [
+        { title: "Artists", links: [["Sebastian", "/for-artists/sebastian"], ["Elizabeth Kopecká", "/for-artists/elizabeth-kopecka"], ["Like-It", "/for-artists/like-it"]] },
+        { title: "For artists", links: [["Develop your project", "/for-artists#pro-interprety"], ["Music distribution", "/music"], ["NFCtron Card Artist Edition", "/cards#artist-edition"]] },
+        { title: "For organizers", links: [["Book an artist", "/for-artists#booking"], ["How booking works", "/for-artists#pro-poradatele"], ["Concert production", "/production"]] },
+      ],
+    },
+    music: {
+      ariaLabel: "NFCtron Music", back: "Back", overview: "NFCtron Music", overviewDescription: "From the studio and release to the live stage.",
+      groups: [
+        { title: "Listen", links: [["Latest releases", "/music#releases"], ["Elizabeth Kopecká", "/for-artists/elizabeth-kopecka"], ["NFCtron artists", "/for-artists"]] },
+        { title: "For artists", links: [["Release music", "/music#distribution"], ["Music distribution", "/music#distribution"], ["Sell Hi-Res music", "/music#music-store"]] },
+        { title: "Connected world", links: [["Artist Edition", "/cards#artist-edition"], ["Booking", "/for-artists#booking"], ["Concert production", "/production"]] },
+      ],
+    },
+    cards: {
+      ariaLabel: "NFCtron Card", back: "Back", overview: "NFCtron Card", overviewDescription: "One card for tickets, refunds and new experiences.",
+      groups: [
+        { title: "Editions", links: [["Artist Edition", "/cards#artist-edition"], ["Festival Edition", "/cards#festival-edition"], ["Vysočina Fest 2027", "/cards#festival-edition"]] },
+        { title: "How it works", links: [["Card activation", "/cards#how-it-works"], ["Card benefits", "/cards#features"], ["Security and refunds", "/cards#features"]] },
+        { title: "Get started", links: [["Activate your card", "/cards#how-it-works"], ["Choose an artist", "/for-artists"], ["Choose an event", "/#events"]] },
+      ],
+    },
+    production: {
+      ariaLabel: "Event production", back: "Back", overview: "NFCtron Production", overviewDescription: "In-house capacity and trusted partners in one production team.",
+      groups: [
+        { title: "Delivery", links: [["How production works", "/production#process"], ["Production scope", "/production#scope"], ["On-site operations", "/for-organizers#operations"]] },
+        { title: "Connected services", links: [["For organizers", "/for-organizers"], ["Vendors and hospitality", "/for-retailers"], ["Artists and music", "/for-artists"]] },
+        { title: "Cooperation", links: [["Request production", "/production#partner"], ["Become a partner", "/production#partner"], ["NFCtron Production", "/company-structure"]] },
+      ],
+    },
   },
-} as const;
+};
 
 function SupportIcon() {
   return (
@@ -160,16 +246,14 @@ function DesktopModeSwitcher({
   active,
   t,
   locale,
-  organizerOpen,
-  onOrganizerOpen,
-  onOrganizerClose,
+  openMenu,
+  onMenuOpen,
 }: {
   active: SiteMode;
   t: (value: string) => string;
   locale: Locale;
-  organizerOpen: boolean;
-  onOrganizerOpen: () => void;
-  onOrganizerClose: () => void;
+  openMenu: NavigableMode | null;
+  onMenuOpen: (mode: NavigableMode) => void;
 }) {
   return (
     <div
@@ -181,11 +265,11 @@ function DesktopModeSwitcher({
           key={mode.id}
           href={localizedPath(locale, mode.href)}
           aria-current={active === mode.id ? "page" : undefined}
-          aria-expanded={mode.id === "organizers" ? organizerOpen : undefined}
-          aria-haspopup={mode.id === "organizers" ? "menu" : undefined}
-          onMouseEnter={mode.id === "organizers" ? onOrganizerOpen : onOrganizerClose}
-          onFocus={mode.id === "organizers" ? onOrganizerOpen : onOrganizerClose}
-          className={`flex h-7 items-center whitespace-nowrap rounded-full px-3 text-[10px] font-medium leading-none transition ${mode.id === "organizers" && organizerOpen ? "bg-[#e9e9f6] text-primary-700 shadow-[inset_0_0_0_1px_rgba(31,27,97,0.05)]" : active === mode.id ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-primary-700"}`}
+          aria-expanded={openMenu === mode.id}
+          aria-haspopup="true"
+          onMouseEnter={() => onMenuOpen(mode.id)}
+          onFocus={() => onMenuOpen(mode.id)}
+          className={`flex h-7 items-center whitespace-nowrap rounded-full px-3 text-[10px] font-medium leading-none transition ${openMenu === mode.id ? "bg-[#e9e9f6] text-primary-700 shadow-[inset_0_0_0_1px_rgba(31,27,97,0.05)]" : active === mode.id ? "bg-white text-primary-700 shadow-sm" : "text-gray-500 hover:text-primary-700"}`}
         >
           <span>{t(mode.label)}</span>
           {mode.beta ? (
@@ -199,22 +283,25 @@ function DesktopModeSwitcher({
   );
 }
 
-function OrganizerMenuContent({
+function MegaMenuContent({
+  mode,
   locale,
   compact = false,
   onNavigate,
 }: {
+  mode: NavigableMode;
   locale: Locale;
   compact?: boolean;
   onNavigate?: () => void;
 }) {
-  const copy = ORGANIZER_MENU[locale];
+  const copy = MENU_COPY[locale][mode];
+  const overviewHref = MODES.find((item) => item.id === mode)?.href ?? "/";
 
   return (
     <div className={compact ? "space-y-8" : "grid grid-cols-[1.35fr_repeat(3,1fr)] gap-12"}>
       <div>
         <Link
-          href={localizedPath(locale, "/for-organizers")}
+          href={localizedPath(locale, overviewHref)}
           onClick={onNavigate}
           className="group inline-flex items-center gap-3 text-2xl font-semibold tracking-[-0.035em] text-primary-900 transition hover:text-primary-600 sm:text-[28px]"
         >
@@ -261,9 +348,9 @@ function MobileModeSwitcher({
   t,
   locale,
   open,
-  organizerView,
+  menuView,
   onToggle,
-  onOrganizerView,
+  onMenuView,
   onBack,
   onClose,
 }: {
@@ -271,9 +358,9 @@ function MobileModeSwitcher({
   t: (value: string) => string;
   locale: Locale;
   open: boolean;
-  organizerView: boolean;
+  menuView: NavigableMode | null;
   onToggle: () => void;
-  onOrganizerView: () => void;
+  onMenuView: (mode: NavigableMode) => void;
   onBack: () => void;
   onClose: () => void;
 }) {
@@ -282,7 +369,7 @@ function MobileModeSwitcher({
     label: "NFCtron",
     href: "/company-structure",
   };
-  const organizerCopy = ORGANIZER_MENU[locale];
+  const menuCopy = menuView ? MENU_COPY[locale][menuView] : null;
 
   return (
     <div className="relative lg:hidden">
@@ -300,48 +387,39 @@ function MobileModeSwitcher({
       </button>
 
       {open ? (
-        <div className={`fixed inset-x-0 bottom-0 top-16 z-50 overflow-y-auto px-5 pb-12 pt-6 transition-colors sm:px-8 ${organizerView ? "bg-[#f8f8fc]" : "bg-white"}`}>
+        <div className={`fixed inset-x-0 bottom-0 top-16 z-50 overflow-y-auto px-5 pb-12 pt-6 transition-colors sm:px-8 ${menuView ? "bg-[#f8f8fc]" : "bg-white"}`}>
           <div className="mx-auto max-w-2xl">
-            {organizerView ? (
+            {menuView && menuCopy ? (
               <>
                 <button
                   type="button"
                   onClick={onBack}
                   className="mb-7 inline-flex items-center gap-2 py-2 text-xs font-medium text-gray-500 hover:text-primary-700"
                 >
-                  <span aria-hidden="true">←</span> {organizerCopy.back}
+                  <span aria-hidden="true">←</span> {menuCopy.back}
                 </button>
-                <OrganizerMenuContent locale={locale} compact onNavigate={onClose} />
+                <MegaMenuContent mode={menuView} locale={locale} compact onNavigate={onClose} />
               </>
             ) : (
               <div className="space-y-1">
-                {MODES.map((mode) =>
-                  mode.id === "organizers" ? (
-                    <button
-                      key={mode.id}
-                      type="button"
-                      onClick={onOrganizerView}
-                      className={`flex w-full items-center justify-between rounded-xl px-4 py-4 text-left text-lg font-medium transition ${active === mode.id ? "bg-primary-50 text-primary-700" : "text-primary-900 hover:bg-gray-50"}`}
-                    >
+                {MODES.map((mode) => (
+                  <button
+                    key={mode.id}
+                    type="button"
+                    onClick={() => onMenuView(mode.id)}
+                    className={`flex w-full items-center justify-between rounded-xl px-4 py-4 text-left text-lg font-medium transition ${active === mode.id ? "bg-primary-50 text-primary-700" : "text-primary-900 hover:bg-gray-50"}`}
+                  >
+                    <span className="flex items-center">
                       {t(mode.label)}
-                      <ArrowIcon />
-                    </button>
-                  ) : (
-                    <Link
-                      key={mode.id}
-                      href={localizedPath(locale, mode.href)}
-                      onClick={onClose}
-                      className={`flex items-center rounded-xl px-4 py-4 text-lg font-medium transition ${active === mode.id ? "bg-primary-50 text-primary-700" : "text-primary-900 hover:bg-gray-50"}`}
-                    >
-                      <span>{t(mode.label)}</span>
                       {mode.beta ? (
                         <span className="ml-2 text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-400">
                           Beta
                         </span>
                       ) : null}
-                    </Link>
-                  ),
-                )}
+                    </span>
+                    <ArrowIcon />
+                  </button>
+                ))}
               </div>
             )}
           </div>
@@ -357,21 +435,21 @@ export default function SiteHeader({
 }: SiteHeaderProps) {
   const t = (value: string) => translate(locale, value);
   const onHome = active === "home";
-  const [organizerOpen, setOrganizerOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<NavigableMode | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileOrganizerView, setMobileOrganizerView] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
+  const [mobileMenuView, setMobileMenuView] = useState<NavigableMode | null>(null);
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
-    setMobileOrganizerView(false);
+    setMobileMenuView(null);
   };
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setOrganizerOpen(false);
-        closeMobileMenu();
+        setOpenMenu(null);
+        setMobileOpen(false);
+        setMobileMenuView(null);
       }
     };
 
@@ -391,11 +469,10 @@ export default function SiteHeader({
 
   return (
     <header
-      ref={headerRef}
-      onMouseLeave={() => setOrganizerOpen(false)}
+      onMouseLeave={() => setOpenMenu(null)}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) {
-          setOrganizerOpen(false);
+          setOpenMenu(null);
         }
       }}
       className="sticky top-0 z-50 border-b border-gray-200/80 bg-white/95 backdrop-blur-md"
@@ -419,9 +496,8 @@ export default function SiteHeader({
           active={active}
           t={t}
           locale={locale}
-          organizerOpen={organizerOpen}
-          onOrganizerOpen={() => setOrganizerOpen(true)}
-          onOrganizerClose={() => setOrganizerOpen(false)}
+          openMenu={openMenu}
+          onMenuOpen={setOpenMenu}
         />
 
         <div className="flex shrink-0 items-center gap-0.5 sm:gap-1 lg:justify-self-end">
@@ -430,13 +506,13 @@ export default function SiteHeader({
             t={t}
             locale={locale}
             open={mobileOpen}
-            organizerView={mobileOrganizerView}
+            menuView={mobileMenuView}
             onToggle={() => {
               setMobileOpen((value) => !value);
-              setMobileOrganizerView(false);
+              setMobileMenuView(null);
             }}
-            onOrganizerView={() => setMobileOrganizerView(true)}
-            onBack={() => setMobileOrganizerView(false)}
+            onMenuView={setMobileMenuView}
+            onBack={() => setMobileMenuView(null)}
             onClose={closeMobileMenu}
           />
           <LanguageMenu locale={locale} />
@@ -456,21 +532,21 @@ export default function SiteHeader({
         </div>
       </nav>
 
-      {organizerOpen ? (
+      {openMenu ? (
         <>
           <button
             type="button"
             aria-label={locale === "cs" ? "Zavřít menu" : "Close menu"}
-            onClick={() => setOrganizerOpen(false)}
+            onClick={() => setOpenMenu(null)}
             className="fixed inset-x-0 bottom-0 top-16 z-30 hidden cursor-default bg-primary-950/10 backdrop-blur-[1px] lg:block"
           />
           <div
-            role="menu"
-            aria-label={ORGANIZER_MENU[locale].ariaLabel}
+            role="navigation"
+            aria-label={MENU_COPY[locale][openMenu].ariaLabel}
             className="mega-menu-reveal absolute inset-x-0 top-full z-40 hidden border-b border-[#e7e7f0] bg-[#f8f8fc] shadow-[0_24px_50px_rgba(17,24,39,0.08)] lg:block"
           >
             <div className="container-fluid py-10 xl:py-12">
-              <OrganizerMenuContent locale={locale} onNavigate={() => setOrganizerOpen(false)} />
+              <MegaMenuContent mode={openMenu} locale={locale} onNavigate={() => setOpenMenu(null)} />
             </div>
           </div>
         </>

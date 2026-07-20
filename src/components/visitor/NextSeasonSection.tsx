@@ -8,7 +8,7 @@ export default function NextSeasonSection({ t }: { t: Translator }) {
   const [featuredEvent, ...otherEvents] = events2027;
 
   return (
-    <section className="bg-primary-900 py-9 text-white sm:py-10 lg:py-12">
+    <section id="next-season" className="scroll-mt-20 bg-primary-900 py-9 text-white sm:py-10 lg:py-12">
       <div className="container-fluid">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-[.16em] text-primary-300">

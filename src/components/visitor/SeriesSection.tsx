@@ -39,7 +39,7 @@ export default function SeriesSection({ locale }: { locale: Locale }) {
   }, [expanded]);
 
   return (
-    <section className="section bg-white">
+    <section id="series" className="section scroll-mt-20 bg-white">
       <div className="container-fluid">
         <div className="flex items-end justify-between gap-6">
           <div>

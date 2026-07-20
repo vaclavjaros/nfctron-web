@@ -82,7 +82,7 @@ export default function ProductionHome({ locale }: { locale: Locale }) {
           }
         />
 
-        <section className="bg-[#fafafd] px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
+        <section id="process" className="scroll-mt-20 bg-[#fafafd] px-5 py-14 sm:px-8 sm:py-20 lg:px-12">
           <div className="mx-auto max-w-[1120px]">
             <div className="max-w-2xl">
               <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700">
@@ -117,7 +117,7 @@ export default function ProductionHome({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className="bg-primary-900 px-5 py-16 text-white sm:px-8 sm:py-24 lg:px-12">
+        <section id="scope" className="scroll-mt-20 bg-primary-900 px-5 py-16 text-white sm:px-8 sm:py-24 lg:px-12">
           <div className="mx-auto max-w-[1120px]">
             <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end lg:gap-20">
               <div><p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-300">{c.scopeEyebrow}</p><h2 className="mt-5 text-3xl font-semibold leading-[1.08] tracking-[-0.045em] sm:text-5xl">{c.scopeTitle}</h2></div>

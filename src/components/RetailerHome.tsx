@@ -235,7 +235,7 @@ export default function RetailerHome({ locale }: { locale: Locale }) {
         </a>
       </section>
 
-      <section className="px-1 py-16 sm:px-4 sm:py-24">
+      <section id="guarantee" className="scroll-mt-24 px-1 py-16 sm:px-4 sm:py-24">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-lg">
             <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700">
@@ -272,7 +272,7 @@ export default function RetailerHome({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="rounded-[30px] bg-[#f7f8fc] px-6 py-12 text-center sm:px-10 sm:py-16">
+      <section id="contact" className="scroll-mt-24 rounded-[30px] bg-[#f7f8fc] px-6 py-12 text-center sm:px-10 sm:py-16">
         <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-700">
           {c.finalEyebrow}
         </p>
