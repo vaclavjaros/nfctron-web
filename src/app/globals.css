@@ -32,11 +32,9 @@
 @keyframes mega-menu-focus-in {
   from {
     opacity: 0;
-    backdrop-filter: blur(0);
   }
   to {
     opacity: 1;
-    backdrop-filter: blur(8px);
   }
 }
 
@@ -49,6 +47,9 @@
 }
 
 .mega-menu-focus {
+  background: rgb(8 10 29 / 30%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   animation: mega-menu-focus-in 220ms ease-out both;
 }
 
