@@ -538,7 +538,7 @@ export default function SiteHeader({
             type="button"
             aria-label={locale === "cs" ? "Zavřít menu" : "Close menu"}
             onClick={() => setOpenMenu(null)}
-            className="fixed inset-x-0 bottom-0 top-16 z-30 hidden cursor-default bg-primary-950/10 backdrop-blur-[1px] lg:block"
+            className="mega-menu-focus fixed inset-x-0 bottom-0 top-16 z-30 hidden cursor-default bg-[#080a1d]/30 backdrop-blur-[8px] lg:block"
           />
           <div
             role="navigation"

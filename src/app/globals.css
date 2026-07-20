@@ -29,6 +29,17 @@
   }
 }
 
+@keyframes mega-menu-focus-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
 .recommendation-reveal {
   animation: recommendation-in 320ms ease-out;
 }
@@ -37,12 +48,20 @@
   animation: mega-menu-in 180ms ease-out;
 }
 
+.mega-menu-focus {
+  animation: mega-menu-focus-in 220ms ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .recommendation-reveal {
     animation: none;
   }
 
   .mega-menu-reveal {
+    animation: none;
+  }
+
+  .mega-menu-focus {
     animation: none;
   }
 }
