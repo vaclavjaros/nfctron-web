@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import LanguageMenu from "./LanguageMenu";
 import { translate, type Locale } from "@/i18n/config";
 import { localizedPath } from "@/i18n/routing";
@@ -346,33 +347,21 @@ function MegaMenuContent({
 function MobileModeSwitcher({
   active,
   t,
-  locale,
   open,
-  menuView,
   onToggle,
-  onMenuView,
-  onBack,
-  onClose,
 }: {
   active: SiteMode;
   t: (value: string) => string;
-  locale: Locale;
   open: boolean;
-  menuView: NavigableMode | null;
   onToggle: () => void;
-  onMenuView: (mode: NavigableMode) => void;
-  onBack: () => void;
-  onClose: () => void;
 }) {
   const activeMode = MODES.find((mode) => mode.id === active) ?? {
     id: "company" as const,
     label: "NFCtron",
     href: "/company-structure",
   };
-  const menuCopy = menuView ? MENU_COPY[locale][menuView] : null;
-
   return (
-    <div className="relative lg:hidden">
+    <div className="lg:hidden">
       <button
         type="button"
         aria-label={t("Otevřít menu")}
@@ -385,46 +374,105 @@ function MobileModeSwitcher({
           <ChevronDownIcon open={open} />
         </span>
       </button>
+    </div>
+  );
+}
 
-      {open ? (
-        <div className={`fixed inset-x-0 bottom-0 top-16 z-50 overflow-y-auto px-5 pb-12 pt-6 transition-colors sm:px-8 ${menuView ? "bg-[#f8f8fc]" : "bg-white"}`}>
-          <div className="mx-auto max-w-2xl">
-            {menuView && menuCopy ? (
-              <>
-                <button
-                  type="button"
-                  onClick={onBack}
-                  className="mb-7 inline-flex items-center gap-2 py-2 text-xs font-medium text-gray-500 hover:text-primary-700"
-                >
-                  <span aria-hidden="true">←</span> {menuCopy.back}
-                </button>
-                <MegaMenuContent mode={menuView} locale={locale} compact onNavigate={onClose} />
-              </>
-            ) : (
-              <div className="space-y-1">
-                {MODES.map((mode) => (
-                  <button
-                    key={mode.id}
-                    type="button"
-                    onClick={() => onMenuView(mode.id)}
-                    className={`flex w-full items-center justify-between rounded-xl px-4 py-4 text-left text-lg font-medium transition ${active === mode.id ? "bg-primary-50 text-primary-700" : "text-primary-900 hover:bg-gray-50"}`}
-                  >
-                    <span className="flex items-center">
-                      {t(mode.label)}
-                      {mode.beta ? (
-                        <span className="ml-2 text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-400">
-                          Beta
-                        </span>
-                      ) : null}
-                    </span>
-                    <ArrowIcon />
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
+function CloseIcon() {
+  return (
+    <svg
+      className="h-5 w-5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      aria-hidden="true"
+    >
+      <path d="M5 5l14 14M19 5 5 19" />
+    </svg>
+  );
+}
+
+function MobileMenuOverlay({
+  active,
+  t,
+  locale,
+  menuView,
+  onMenuView,
+  onBack,
+  onClose,
+}: {
+  active: SiteMode;
+  t: (value: string) => string;
+  locale: Locale;
+  menuView: NavigableMode | null;
+  onMenuView: (mode: NavigableMode) => void;
+  onBack: () => void;
+  onClose: () => void;
+}) {
+  const menuCopy = menuView ? MENU_COPY[locale][menuView] : null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={locale === "cs" ? "Hlavní menu" : "Main menu"}
+      className="mega-menu-mobile fixed inset-0 z-[80] overflow-y-auto overscroll-contain bg-white lg:hidden"
+    >
+      <div className="sticky top-0 z-10 border-b border-gray-200/80 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-2xl items-center justify-between px-5 sm:px-8">
+          <Image src="/nfctron-logo-dark.svg" alt="NFCtron" width={96} height={18} />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={locale === "cs" ? "Zavřít menu" : "Close menu"}
+            className="flex h-10 w-10 items-center justify-center rounded-full text-primary-900 transition hover:bg-gray-100"
+          >
+            <CloseIcon />
+          </button>
         </div>
-      ) : null}
+      </div>
+
+      <div className={`min-h-[calc(100dvh-4rem)] transition-colors ${menuView ? "bg-[#f8f8fc]" : "bg-white"}`}>
+        <div className="mx-auto max-w-2xl px-5 pb-14 pt-8 sm:px-8 sm:pt-10">
+          {menuView && menuCopy ? (
+            <>
+              <button
+                type="button"
+                onClick={onBack}
+                className="mb-7 inline-flex min-h-10 items-center gap-2 text-sm font-medium text-gray-500 transition hover:text-primary-700"
+              >
+                <span aria-hidden="true">←</span> {menuCopy.back}
+              </button>
+              <MegaMenuContent mode={menuView} locale={locale} compact onNavigate={onClose} />
+            </>
+          ) : (
+            <div className="space-y-1">
+              {MODES.map((mode) => (
+                <button
+                  key={mode.id}
+                  type="button"
+                  onClick={() => onMenuView(mode.id)}
+                  className={`group flex min-h-16 w-full items-center justify-between rounded-xl px-3 py-3 text-left text-[25px] font-medium tracking-[-0.035em] transition sm:text-[28px] ${active === mode.id ? "text-primary-600" : "text-primary-900 hover:bg-gray-50 hover:text-primary-600"}`}
+                >
+                  <span className="flex items-center">
+                    {t(mode.label)}
+                    {mode.beta ? (
+                      <span className="ml-2.5 text-[8px] font-semibold uppercase tracking-[0.1em] text-primary-400">
+                        Beta
+                      </span>
+                    ) : null}
+                  </span>
+                  <span className="text-gray-300 transition group-hover:translate-x-1 group-hover:text-primary-400">
+                    <ArrowIcon />
+                  </span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -438,11 +486,16 @@ export default function SiteHeader({
   const [openMenu, setOpenMenu] = useState<NavigableMode | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileMenuView, setMobileMenuView] = useState<NavigableMode | null>(null);
+  const [portalReady, setPortalReady] = useState(false);
 
   const closeMobileMenu = () => {
     setMobileOpen(false);
     setMobileMenuView(null);
   };
+
+  useEffect(() => {
+    setPortalReady(true);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -468,89 +521,97 @@ export default function SiteHeader({
   }, [mobileOpen]);
 
   return (
-    <header
-      onMouseLeave={() => setOpenMenu(null)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) {
-          setOpenMenu(null);
-        }
-      }}
-      className="sticky top-0 z-50 border-b border-gray-200/80 bg-white/95 backdrop-blur-md"
-    >
-      <nav
-        className="container-fluid relative z-50 flex h-16 items-center justify-between gap-3 bg-white/95 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-5"
-        aria-label={t("Hlavní navigace")}
-      >
-        <div className="flex min-w-0 shrink-0 items-center lg:justify-self-start">
-          <Link href={localizedPath(locale, "/")} aria-label="NFCtron domů" className="shrink-0">
-            <Image
-              src="/nfctron-logo-dark.svg"
-              alt="NFCtron"
-              width={86}
-              height={16}
-            />
-          </Link>
-        </div>
+    <>
+      <header className="sticky top-0 z-[70] border-b border-gray-200/80 bg-white/95 backdrop-blur-md">
+        <nav
+          className="container-fluid relative z-50 flex h-16 items-center justify-between gap-3 bg-white/95 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-5"
+          aria-label={t("Hlavní navigace")}
+        >
+          <div className="flex min-w-0 shrink-0 items-center lg:justify-self-start">
+            <Link href={localizedPath(locale, "/")} aria-label="NFCtron domů" className="shrink-0">
+              <Image
+                src="/nfctron-logo-dark.svg"
+                alt="NFCtron"
+                width={86}
+                height={16}
+              />
+            </Link>
+          </div>
 
-        <DesktopModeSwitcher
-          active={active}
-          t={t}
-          locale={locale}
-          openMenu={openMenu}
-          onMenuOpen={setOpenMenu}
-        />
-
-        <div className="flex shrink-0 items-center gap-0.5 sm:gap-1 lg:justify-self-end">
-          <MobileModeSwitcher
+          <DesktopModeSwitcher
             active={active}
             t={t}
             locale={locale}
-            open={mobileOpen}
-            menuView={mobileMenuView}
-            onToggle={() => {
-              setMobileOpen((value) => !value);
-              setMobileMenuView(null);
-            }}
-            onMenuView={setMobileMenuView}
-            onBack={() => setMobileMenuView(null)}
-            onClose={closeMobileMenu}
+            openMenu={openMenu}
+            onMenuOpen={setOpenMenu}
           />
-          <LanguageMenu locale={locale} />
-          <Link
-            href={onHome ? "#support" : localizedPath(locale, "/#support")}
-            aria-label={t("Přejít na podporu návštěvníků")}
-            className="flex h-7 items-center gap-1.5 rounded-full px-2 text-[10px] font-medium leading-none tracking-[0.01em] text-gray-500 transition hover:bg-gray-50 hover:text-primary-700"
-          >
-            <SupportIcon /> <span className="hidden xl:inline">Support</span>
-          </Link>
-          <Link
-            href="https://tickets.nfctron.com/login"
-            className="ml-0.5 inline-flex h-7 items-center whitespace-nowrap rounded-full bg-primary-700 px-3 text-[10px] font-medium leading-none text-white transition hover:bg-primary-900 sm:ml-1"
-          >
-            {t("Přihlásit se")}
-          </Link>
-        </div>
-      </nav>
 
-      {openMenu ? (
-        <>
-          <button
-            type="button"
-            aria-label={locale === "cs" ? "Zavřít menu" : "Close menu"}
-            onClick={() => setOpenMenu(null)}
-            className="mega-menu-focus fixed inset-x-0 bottom-0 top-16 z-30 hidden cursor-default lg:block"
-          />
-          <div
-            role="navigation"
-            aria-label={MENU_COPY[locale][openMenu].ariaLabel}
-            className="mega-menu-reveal absolute inset-x-0 top-full z-40 hidden border-b border-[#e7e7f0] bg-[#f8f8fc] shadow-[0_24px_50px_rgba(17,24,39,0.08)] lg:block"
-          >
-            <div className="container-fluid py-10 xl:py-12">
-              <MegaMenuContent mode={openMenu} locale={locale} onNavigate={() => setOpenMenu(null)} />
-            </div>
+          <div className="flex shrink-0 items-center gap-0.5 sm:gap-1 lg:justify-self-end">
+            <MobileModeSwitcher
+              active={active}
+              t={t}
+              open={mobileOpen}
+              onToggle={() => {
+                setMobileOpen((value) => !value);
+                setMobileMenuView(null);
+              }}
+            />
+            <LanguageMenu locale={locale} />
+            <Link
+              href={onHome ? "#support" : localizedPath(locale, "/#support")}
+              aria-label={t("Přejít na podporu návštěvníků")}
+              className="flex h-7 items-center gap-1.5 rounded-full px-2 text-[10px] font-medium leading-none tracking-[0.01em] text-gray-500 transition hover:bg-gray-50 hover:text-primary-700"
+            >
+              <SupportIcon /> <span className="hidden xl:inline">Support</span>
+            </Link>
+            <Link
+              href="https://tickets.nfctron.com/login"
+              className="ml-0.5 inline-flex h-7 items-center whitespace-nowrap rounded-full bg-primary-700 px-3 text-[10px] font-medium leading-none text-white transition hover:bg-primary-900 sm:ml-1"
+            >
+              {t("Přihlásit se")}
+            </Link>
           </div>
-        </>
-      ) : null}
-    </header>
+        </nav>
+      </header>
+
+      {portalReady && openMenu
+        ? createPortal(
+            <div className="fixed inset-x-0 bottom-0 top-16 z-[60] hidden lg:block">
+              <button
+                type="button"
+                aria-label={locale === "cs" ? "Zavřít menu" : "Close menu"}
+                onClick={() => setOpenMenu(null)}
+                className="mega-menu-focus absolute inset-0 cursor-default"
+              />
+              <div
+                role="navigation"
+                aria-label={MENU_COPY[locale][openMenu].ariaLabel}
+                onMouseLeave={() => setOpenMenu(null)}
+                className="mega-menu-reveal absolute inset-x-0 top-0 z-10 border-b border-[#e7e7f0] bg-[#f8f8fc] shadow-[0_24px_50px_rgba(17,24,39,0.08)]"
+              >
+                <div className="container-fluid py-10 xl:py-12">
+                  <MegaMenuContent mode={openMenu} locale={locale} onNavigate={() => setOpenMenu(null)} />
+                </div>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
+
+      {portalReady && mobileOpen
+        ? createPortal(
+            <MobileMenuOverlay
+              active={active}
+              t={t}
+              locale={locale}
+              menuView={mobileMenuView}
+              onMenuView={setMobileMenuView}
+              onBack={() => setMobileMenuView(null)}
+              onClose={closeMobileMenu}
+            />,
+            document.body,
+          )
+        : null}
+    </>
   );
 }
