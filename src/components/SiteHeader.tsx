@@ -70,7 +70,7 @@ const MENU_COPY: Record<Locale, Record<NavigableMode, MegaMenuCopy>> = {
       overview: "Přehled pro pořadatele",
       overviewDescription: "Jeden partner pro ticketing, platby a provoz akce.",
       groups: [
-        { title: "Produkty", links: [["Ticketing a vstup", "/for-organizers#ecosystem"], ["Platby na akci", "/for-organizers#payments"], ["NFCtron Hub", "/for-organizers#ecosystem"]] },
+        { title: "Produkty", links: [["Ticketing a vstup", "/for-organizers/ticketing"], ["Platby na akci", "/for-organizers#payments"], ["NFCtron Hub", "/for-organizers#ecosystem"]] },
         { title: "Služby", links: [["Provoz na místě", "/for-organizers#operations"], ["Prodejci a gastro", "/for-retailers"], ["Produkce akce", "/production"]] },
         { title: "Začít", links: [["Poptat řešení", "/for-organizers#contact"], ["Jak spolupráce probíhá", "/for-organizers#journey"], ["Akce s NFCtron", "/#events"]] },
       ],
@@ -143,7 +143,7 @@ const MENU_COPY: Record<Locale, Record<NavigableMode, MegaMenuCopy>> = {
     organizers: {
       ariaLabel: "Services and products for organizers", back: "Back", overview: "For organizers", overviewDescription: "One partner for ticketing, payments and event operations.",
       groups: [
-        { title: "Products", links: [["Ticketing and entry", "/for-organizers#ecosystem"], ["Event payments", "/for-organizers#payments"], ["NFCtron Hub", "/for-organizers#ecosystem"]] },
+        { title: "Products", links: [["Ticketing and entry", "/for-organizers/ticketing"], ["Event payments", "/for-organizers#payments"], ["NFCtron Hub", "/for-organizers#ecosystem"]] },
         { title: "Services", links: [["On-site operations", "/for-organizers#operations"], ["Vendors and hospitality", "/for-retailers"], ["Event production", "/production"]] },
         { title: "Get started", links: [["Request a solution", "/for-organizers#contact"], ["How we work", "/for-organizers#journey"], ["Events with NFCtron", "/#events"]] },
       ],

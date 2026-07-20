@@ -80,6 +80,12 @@ export default function SiteFooter({ locale }: { locale: Locale }) {
             >
               {t("Skupina NFCtron")}
             </Link>
+            <Link
+              href={localizedPath(locale, "/brand-assets")}
+              className={footerLinkClass}
+            >
+              {locale === "cs" ? "Grafické podklady" : "Brand assets"}
+            </Link>
             <a href="mailto:info@nfctron.com" className={footerLinkClass}>
               {t("Kontakt")}
             </a>

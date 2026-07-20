@@ -16,10 +16,14 @@ const internalRoutes = new Set([
   "/for-artists/like-it",
   "/for-artists/sebastian",
   "/for-organizers",
+  "/for-organizers/ticketing",
   "/for-retailers",
   "/music",
   "/production",
+  "/brand-assets",
 ]);
+
+const publicAssetPattern = /\.(?:avif|gif|ico|jpe?g|png|svg|webp)$/i;
 
 async function filesIn(directory) {
   const entries = await readdir(directory);
@@ -64,6 +68,7 @@ for (const [file, contents] of source) {
 
   for (const match of contents.matchAll(/href="(\/[^"\s]*)"/g)) {
     const route = match[1].split(/[?#]/, 1)[0] || "/";
+    if (publicAssetPattern.test(route)) continue;
     const publicRoute = route.replace(/^\/(?:cs|en)(?=\/|$)/, "") || "/";
     report(
       internalRoutes.has(publicRoute),
@@ -84,6 +89,7 @@ const heroPages = [
   "src/features/music/MusicHome.tsx",
   "src/features/cards/CardsHome.tsx",
   "src/features/company/CompanyStructureHome.tsx",
+  "src/features/brand-assets/BrandAssetsHome.tsx",
 ];
 
 for (const relative of heroPages) {
@@ -103,6 +109,7 @@ report(
 const routes = [
   "/",
   "/for-organizers",
+  "/for-organizers/ticketing",
   "/for-retailers",
   "/for-artists",
   "/for-artists/elizabeth-kopecka",
@@ -112,6 +119,7 @@ const routes = [
   "/cards",
   "/company-structure",
   "/production",
+  "/brand-assets",
 ];
 
 if (liveUrl) {
